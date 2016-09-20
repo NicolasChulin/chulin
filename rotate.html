@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rotate-new</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+</head>
+<body>
+    <style>
+        .container{
+            height: 667px;
+            position: relative;
+            top: 0;
+            left: 0;
+            background: #e4e4e4;
+            font-size: 16px;
+            font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            overflow-x:hidden ;
+        }
+        .text-element{
+            position: absolute;
+            left: 100px;
+            top: 200px;
+            text-align: center;
+            z-index: 100;
+        }
+        .element-box-content{
+            padding: 15px;
+            border: 1px dashed #373737;
+        }
+        .ele-rotate-ctrl{
+            width: 20px;
+            height: 20px;
+            background: #67b168;
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            border-radius: 3px;
+            text-align: center;
+            /*display: none;*/
+        }
+        /*.ele-rotate-ctrl{*/
+            /*width: 20px;*/
+            /*height: 20px;*/
+            /*background: #373737;*/
+            /*position: absolute;*/
+            /*top: 20px;*/
+            /*left: 20px;*/
+            /*z-index: 400;*/
+            /*margin-left: -10px;*/
+            /*margin-top: -10px;*/
+            /*border-radius: 3px;*/
+            /*text-align: center;*/
+            /*color: #ffffff;*/
+        /*}*/
+        .clear{
+            height: 30px;
+            padding: 10px;
+            width: 60px;
+            color: #000000;
+            background:#67b168;
+        }
+    </style>
+    <div class="container">
+        <div class="cnd-element text-element">
+            <div class="element-box">
+                <div class="element-box-content">这是什么</div>
+            </div>
+            <div class="ele-rotate-ctrl"><span class="glyphicon glyphicon-refresh"></span></div>
+        </div>
+        <!--<div class="ele-rotate-ctrl"><span class="glyphicon glyphicon-refresh"></span></div>-->
+        <div class="clear">clear</div>
+        <div class="bdsharebuttonbox" data-tag="share_1">
+            <a class="bds_mshare" data-cmd="mshare"></a>
+            <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+            <a class="bds_tsina" data-cmd="tsina"></a>
+            <a class="bds_baidu" data-cmd="baidu"></a>
+            <a class="bds_renren" data-cmd="renren"></a>
+            <a class="bds_tqq" data-cmd="tqq"></a>
+            <a class="bds_more" data-cmd="more">更多</a>
+            <a class="bds_count" data-cmd="count"></a>
+        </div>
+    </div>
+    <script>
+        window._bd_share_config = {
+            common : {
+                //此处放置通用设置
+                bdText:'wodefenxiang',
+                bdDesc:'yunye',
+                bdUrl:location.href
+            },
+            share : [
+                //此处放置分享按钮设置
+            ],
+            slide : [
+                //此处放置浮窗分享设置
+            ],
+            image : [
+                //此处放置图片分享设置
+            ],
+            selectShare : [
+                //此处放置划词分享设置
+            ]
+        };
+        	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+
+    </script>
+    <script>
+        function log(cont){
+            console.log(cont);
+        }
+        $(function(){
+            $('.clear').on('click',function(){
+                $('.text-element').css('transform','');
+            });
+
+            var bx, by, _bx, _by, barx, bary,move=false;
+//            var midp={},botp={},rbotp={},movp={},deg,rotate={},ddl,ths,fa;
+            /*element 移动*/
+            $('.element-box-content').on('touchstart touchmove touchend', function (event) {
+                var e = event.originalEvent.targetTouches[0];
+                var ths = $(this);
+                var box = ths.parents('.text-element');
+                if(event.type == "touchstart"){
+                    barx = parseInt(box.css('left'));
+                    bary = parseInt(box.css('top'));
+                    _bx = e.pageX;
+                    _by = e.pageY;
+                }else if(event.type == "touchmove") {
+                    move = true;
+                    event.preventDefault();
+                    if (move){
+                        bx = e.pageX;
+                        by = e.pageY;
+                        var sx = bx - _bx + barx;
+                        var sy = by - _by + bary;
+                        box.css({'left': sx + 'px', top: sy + 'px'});
+                    }
+                }else{
+                    move = false;
+                }
+            });
+
+            $('.ele-rotate-ctrl').on('touchstart touchmove touchend', function(event){
+                var e = event.originalEvent.targetTouches[0];
+                var box = $(this).siblings('.element-box').children();
+                var fa = $(this).parent();
+                console.log(22222222222222);
+                event.stopPropagation();
+                if (event.type == "touchstart"){
+                    _bx = e.pageX;
+                    _by = e.pageY;
+                    console.log('112');
+
+                } else if (event.type == "touchmove") {
+                    event.preventDefault();
+                    console.log(move);
+                    move = true;
+                    if (move) {
+                        bx = e.pageX;
+                        by = e.pageY;
+                        var midp={},botp={},movp={};
+                        var eleft = parseInt(fa.css('left'));
+                        var etop = parseInt(fa.css('top'));
+                        var ewidth = parseInt(fa.outerWidth());
+                        var eheight = parseInt(fa.outerHeight());
+                        midp.left = eleft+ewidth/2;
+                        midp.top = etop+eheight/2;
+                        botp.left = eleft+ewidth;
+                        botp.top = etop+eheight;
+                        var dlength = getTwoPointDistance(midp,botp);
+                        movp.left = botp.left + bx - _bx;
+                        movp.top = botp.top + by - _by;
+                        var bvl = getTwoPointDistance(botp,movp);
+                        var mbl = getTwoPointDistance(midp,botp);
+                        var mvl = getTwoPointDistance(midp,movp);
+                        var ndeg = getTwoLineDeg(mbl,mvl,bvl);
+                        var nrate = mvl/dlength;
+                        if(getRotateDirect(midp,botp,movp)>0){
+                            ndeg = -180*ndeg/Math.PI;
+                        }else{
+                            ndeg = 180*ndeg/Math.PI;
+                        }
+                        ndeg = keepTwoValid(ndeg);
+                        nrate = keepTwoValid(nrate);
+                        var tranf = 'rotate('+ndeg+'deg) scale('+nrate+')';
+                        box.css({'transform':tranf});
+//                        var mr = bx-_bx+parseInt($('.ele-rotate-ctrl').css('right'));
+//                        var mb = by-_by+parseInt($('.ele-rotate-ctrl').css('bottom'));
+//                        $('.ele-rotate-ctrl').css({right:mr+'px',bottom:mb+'px'});
+                    }
+                } else {
+                    move = false;
+//                    dre();
+                }
+            });
+
+            function dre(){
+                $('.ele-rotate-ctrl').off('touchstart touchmove touchend').on('touchstart touchmove touchend', function(event){
+                var e = event.originalEvent.targetTouches[0];
+                var box = $(this).siblings('.element-box').children();
+                var fa = $(this).parent();
+                console.log(22222222222222);
+                event.stopPropagation();
+                if (event.type == "touchstart"){
+                    _bx = e.pageX;
+                    _by = e.pageY;
+                    console.log('112');
+
+                } else if (event.type == "touchmove") {
+                    event.preventDefault();
+                    console.log(move);
+                    move = true;
+                    if (move) {
+                        bx = e.pageX;
+                        by = e.pageY;
+                        var midp={},botp={},movp={};
+                        var eleft = parseInt(fa.css('left'));
+                        var etop = parseInt(fa.css('top'));
+                        var ewidth = parseInt(fa.outerWidth());
+                        var eheight = parseInt(fa.outerHeight());
+                        midp.left = eleft+ewidth/2;
+                        midp.top = etop+eheight/2;
+                        botp.left = eleft+ewidth;
+                        botp.top = etop+eheight;
+                        var dlength = getTwoPointDistance(midp,botp);
+                        movp.left = botp.left + bx - _bx;
+                        movp.top = botp.top + by - _by;
+                        var bvl = getTwoPointDistance(botp,movp);
+                        var mbl = getTwoPointDistance(midp,botp);
+                        var mvl = getTwoPointDistance(midp,movp);
+                        var ndeg = getTwoLineDeg(mbl,mvl,bvl);
+                        var nrate = mvl/dlength;
+                        if(getRotateDirect(midp,botp,movp)>0){
+                            ndeg = -180*ndeg/Math.PI;
+                        }else{
+                            ndeg = 180*ndeg/Math.PI;
+                        }
+                        ndeg = keepTwoValid(ndeg);
+                        nrate = keepTwoValid(nrate);
+                        var tranf = 'rotate('+ndeg+'deg) scale('+nrate+')';
+                        fa.css({'transform':tranf});
+//                        $('.ele-rotate-ctrl').css({left:movp.left+'px',top:movp.top+'px'});
+                    }
+                } else {
+                    move = false;
+                }
+            });
+            }
+
+            function getTwoLineDeg(lone,ltwo,lthr){
+                return (Math.acos((Math.pow(lone,2)+Math.pow(ltwo,2)-Math.pow(lthr,2))/(2*lone*ltwo))).toFixed(6);
+            }
+            function getTwoPointDistance(pone,ptwo){
+                var x =  ptwo.left-pone.left;
+                var y =  ptwo.top-pone.top;
+                return Math.pow(Math.pow(x,2)+Math.pow(y,2),0.5);
+            }
+
+            function getRotateDirect(a,b,c){
+                return (c.left- a.left)*(b.top- a.top)-(b.left-a.left)*(c.top- a.top)
+            }
+            function keepTwoValid(num){
+                num=parseFloat(num);
+                return num.toFixed(4);
+            }
+
+//            $('.text-element').on('click',function(){
+//                var ths = $(this);
+//                ths.children('.el-rotate').show();
+//                if($.isEmptyObject(ths.data('botp'))){
+//                    var eleft = parseInt(ths.css('left'));
+//                    var etop = parseInt(ths.css('top'));
+//                    var ewidth = parseInt(ths.outerWidth());
+//                    var eheight = parseInt(ths.outerHeight());
+//                    midp.left = eleft+ewidth/2;
+//                    midp.top = etop+eheight/2;
+//                    botp.left = eleft+ewidth;
+//                    botp.top = etop+eheight;
+//                    ths.data('botp',botp);
+//                    ths.data('midp',midp);
+//                }else{
+//                    botp = ths.data('botp');
+//                    midp = ths.data('midp');
+//                }
+//                log('click--------------------');
+//                log(botp);
+//            });
+        });
+    </script>
+
+</body>
+</html>

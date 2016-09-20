@@ -1,0 +1,152 @@
+
+/*common*/
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    font-size: 13px;
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+.body{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+}
+.body-header{
+    position: absolute;
+    top: 0px;
+    height: 40px;
+    width: 100%;
+    background: #007947;
+    color: #ffffff;
+    text-align: center;
+    z-index: 99;
+}
+.body-footer{
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    width: 100%;
+    background: #007947;
+    color: #ffffff;
+    text-align: center;
+    z-index: 99;
+}
+.body-cont{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 40px 0;
+    z-index: 9;
+}
+
+/*-----yy-model------*/
+.yy-model {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 100%;
+	top: 0;
+	z-index: 200;
+	background-color: #fff;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all .2s ease-in;
+	transition: all .2s ease-in;
+}
+
+.yy-model.open {
+	left: 0;
+	opacity: 1;
+	visibility: visible;
+}
+
+.yy-model .model-header {
+	height: 1.62rem;
+	line-height: 1.62rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #31364a;
+	border-bottom: none;
+}
+
+.yy-model .model-header .btn-back {
+	width: 1.62rem;
+	height: 1.62rem;
+	line-height: 1.62rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: #fff;
+	font-size: 30px;
+	text-align: center;
+}
+
+.yy-model .model-header .title {
+	width: 100%;
+	padding: 0;
+	line-height: 1.62rem;
+	margin: 0;
+	font-size: 0.73rem;
+	font-weight: normal;
+	text-align: center;
+	color:#fff;
+}
+
+.yy-model .model-header .btn-right {
+	height: 1.62rem;
+	line-height: 1.62rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #fff;
+	padding: 0 15px;
+}
+
+.yy-model .model-body {
+	position:absolute;
+	width: 100%;
+	top:1.62rem;
+	bottom:0;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.model-subheader + .model-body{
+	top:87px;
+}
+.yy-model .sysWraper {
+	padding: 10% 30%;
+	text-align: center;
+}
+.yy-model .model-subheader{
+	position:absolute;
+	width: 100%;
+	top:1.62rem;
+	left: 0;
+	height:1.62rem;
+}
+.yy-model .model-subheader .subtabs{
+	position:relative;
+	height: 1.62rem;
+    line-height: 1.62rem;
+    padding-top: 0;
+}
+.yy-model .model-subheader .subtabs .tab-item{
+	max-width:100%;
+	border-bottom: 1px solid #eaeaea;
+	border-right:1px solid #eaeaea;
+}
+.yy-model .model-subheader .subtabs .tab-item.active{
+	color:#06ad9b;
+	background:#fff;
+	opacity: 1;
+	border-bottom:0;
+}

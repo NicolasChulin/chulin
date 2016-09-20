@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>gn-dom</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <script type="text/javascript" src="lib/js/angular.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-controller="myctrl">
+<style>
+    .pbar-back{
+        height: 40px;
+        background: #686868;
+        box-shadow: 0 0 5px #373737;
+        margin: 30px 0;
+    }
+    .pbar-line{
+        height: 40px;
+        background: #49ff74;
+        width: 50%;
+    }
+</style>
+    <div class="container">
+        <div class="jumbotron">
+            <h2>{{parentVar}}</h2>
+        </div>
+       <div class="jumbotron">
+           <h2>scope测试</h2>
+           <p>
+               parent: <input type="text" ng-model="val" ><br><br>
+           </p>
+           <p ng-controller="childCtrl">
+                child: <input type="text" ng-model="val" >
+               <br>
+               child-var: {{childvar}}
+           </p>
+       </div>
+
+        <div class="jumbotron">
+            <h2>这是一个progerss-bar</h2>
+            <progerss><div class="hello">hello here</div></progerss>
+
+            <progerssbar1 val="val" pwidth="60"></progerssbar1>
+        </div>
+
+    </div>
+<script>
+    var app = angular.module('myapp',[]);
+    app.directive('progerss',function(){
+        return {
+            restrict:'EA',
+            template:'<div class="pbar-back" ng-click="change()"><div class="pbar-line" ng-style="pbarStyle"></div></div>{{parentVar}}<div ng-transclude></div>',
+            transclude:true,
+            scope:true,
+//            scope:false,
+//            replace:true,
+            link:function(scope,elem,attrs){
+                var i = 0;
+                scope.change =function(){
+                    scope.parentVar = 'child---'+(i++);
+                }
+            }
+        }
+    });
+
+    app.directive('progerssbar1',function(){
+        return {
+            restrict:'E',
+            template:'<div class="pbar-back" ng-click="change()"><div class="pbar-line" ng-style="pbarStyle"></div></div>' +
+            '<p>val:<input type="text" ng-model="val">{{val}}</p>' +
+            '<p>parentVar:<input type="text" ng-model="parentVar">{{parentVar}}</p>',
+            scope:{
+                val:'=',
+                pwidth:'@'
+            },
+            link:function(scope,elem,attrs){
+                scope.pbarStyle = {
+                    width:scope.pwidth+'%',
+                };
+
+            }
+        }
+    });
+
+    app.controller('myctrl',function($scope){
+        $scope.parentVar = 'parent';
+    });
+    app.controller('childCtrl',function($scope){
+        $scope.childvar = $scope.parentVar;
+    });
+
+</script>
+
+</body>
+</html>

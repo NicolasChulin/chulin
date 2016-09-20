@@ -1,0 +1,170 @@
+@charset "UTF-8";
+
+html,body {
+    height:100%;
+    overflow:hidden;
+}
+body{
+    font-family: "微软雅黑","Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #d0d0d0;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow:auto;
+}
+.kw ul{
+    padding: 0;
+    list-style-type:none;
+}
+.kw{
+    font-size: 15px;
+    color:#5b5b5b;
+    background: #d0d0d0;
+    overflow: hidden;
+    padding-bottom: 70px;
+}
+.kw-list{
+    margin-top: 20px;
+    background: #ffffff;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.kw-list a{
+    display: block;
+    font-size: 20px;
+    color: #5b5b5b;
+    font-weight: 600;
+    padding: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.hli-act{
+    background: #f3f3f3;
+    background-image: url('../images/kw-jiantou.png');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+.ed-title {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid #b4b4b4;
+}
+.ed-content{
+    padding:15px 0;
+    height: 160px;
+    overflow-y: auto;
+    line-height: 35px;
+}
+.ed-content span{
+    display: inline-block;
+    vertical-align: middle;
+    height: 30px;
+    line-height: 26px;
+    padding:0 5px;
+    font-size: 18px;
+    color:#268bb9;
+    font-weight: 600;
+    border: 2px solid #268bb9;
+    margin: 3px;
+}
+.ed-cont-tips{
+    color: #929292;
+    margin-bottom: 5px;
+}
+.ed-choose{
+    background: #f3f3f3;
+    height: 265px;
+    overflow-y: scroll;
+    padding: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.ed-choose .col-xs-6{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.ed-choose .cbox-line{
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+}
+.ed-choose .cbox-line .glyphicon{
+    color: #aeaeae;
+    margin-right: 3px;
+    font-size: 20px;
+}
+.ed-choose .cbox-line .glyphicon-check{
+    color: #268bb9;
+}
+.ed-choose-li>.glyphicon{
+    display: block;
+    position: absolute;
+    top: 9px;
+    right: 15px;
+    background-color: #e0342b;
+    color:#ffffff;
+    padding: 3px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+.ed-add{
+    padding: 20px 15px;
+    height: 95px;
+}
+.ed-add .ed-add-li{
+    padding:0;
+}
+.ed-add .col-xs-1 span{
+    display: block;
+    margin-top: 20px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+.ed-add .form-control{
+    padding:0 6px;
+    font-size: 18px;
+}
+.ed-add .btn {
+    background: #848484;
+    color: #ffffff;
+}
+.ed-footer{
+    height: 70px;
+    max-width: 600px;
+    margin: 0 auto;
+    background:#434343;
+    text-align: center;
+    font-size: 18px;
+    padding: 15px;
+    position: absolute;
+    z-index: 99;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+.ed-footer .btn{
+    width: 100px;
+    background: #f3f3f3;
+    font-size: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin: 0 10px;
+    border: 0;
+}

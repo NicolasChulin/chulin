@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>text-editor-model</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.min.js"></script>
+    <script type="text/javascript" src="ng-textEditor.js"></script>
+    <link rel="stylesheet" href="../../lib/ionic/css/ionic.min.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="ng-textEditor.css">
+    <link rel="stylesheet" href="../../plugin/fontawesome/css/font-awesome.min.css">
+</head>
+<body ng-controller="myappController">
+<div class="body">
+    <!-- 页面头部 -->
+    <div class="body-header">text model</div>
+
+    <!-- 页面内容 -->
+    <div class="body-cont" ng-click="eleAction.inactElement()">
+        <div ng-repeat="c in eles" class="pst-element"
+             ng-class="{true:c.type+' pst-element-act',false:c.type}[eleAction.act == $index]" ng-style="c.eleStyle"
+             ng-click="eleAction.actElement($event,$index)" on-drag="moveEle.dragEle($event,$index)"
+             on-release="moveEle.releaseEle()">
+            <div class="el-content" ng-style="c.conStyle" ng-bind-html="c.content"></div>
+
+            <dom-oper ng-if="(c.type == 'text-element')"></dom-oper>
+        </div>
+    </div>
+
+    <!-- 页面底部 -->
+    <div class="body-footer" ng-click="eleAction.addElement()">
+        T
+    </div>
+    <text-editor select-ele="eleAction.selectEle" model-show="eleAction.modelShow"></text-editor>
+
+</div>
+
+</body>
+</html>

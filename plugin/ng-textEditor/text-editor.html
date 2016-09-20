@@ -1,0 +1,184 @@
+<div class="yy-model text-model" ng-class="{true:'open'}[modelShow]">
+    <div class="model-header">
+	    <div class="btn-back" ng-click="model.close()" ><i class="ion-ios-arrow-left"></i></div>
+	    <h3 class="title">文本编辑</h3>
+	    <div class="btn-right" ng-click="model.add()">确认</div>
+	</div>
+    <div class="model-body">
+        <div class="text-cont-box">
+            <div class="el-cont-style" id="el-cont-style">
+                <div class="text-cb-text" id="text-cb-text" ng-style="textStyle" ng-model="textCont" contenteditable="true" strip-br="true" data-placeholder="请输入文字"></div>
+            </div>
+        </div>
+        <div class="teditor" id="teditor">
+            <div class="ted-menu">
+                <ul class="row">
+                    <li class="col ted-menu-base" ng-class="{true:'ted-menu-act'}[menu.actItem == 'base']" ng-click="menu.showOper('base')">
+                        <i class="icon ion-navicon-round"></i>
+                    </li>
+                    <li class="col ted-menu-li ted-menu-color" ng-class="{true:'ted-menu-act'}[menu.actItem == 'color']" ng-click="menu.showOper('color')">
+                        <i class="icon ion-android-color-palette"></i>
+                    </li>
+                    <li class="col ted-menu-li ted-menu-effects" ng-class="{true:'ted-menu-act'}[menu.actItem == 'effects']" ng-click="menu.showOper('effects')">
+                        <i class="icon ion-android-sunny"></i>
+                    </li>
+                    <li class="col ted-menu-li ted-menu-back" ng-class="{true:'ted-menu-act'}[menu.actItem == 'back']" ng-click="menu.showOper('back')">
+                        <i class="icon ion-android-checkbox-outline-blank"></i>
+                    </li>
+                    <li class="col ted-menu-li ted-menu-button" ng-class="{true:'ted-menu-act'}[menu.actItem == 'link']" ng-click="menu.showOper('link')">
+                        <i class="icon ion-link"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="ted-ctrl">
+                <div class="ted-color-selected" ng-style="colorTip.selectStyle" ng-show="colorTip.selectShow"></div>
+                <div class="ted-ctrl-li ted-ctrl-base" ng-show="menu.actItem == 'base'">
+                    <div class="ted-base-top">
+                        <div class="base-top-group">
+                            <div class="base-top-font buttons">
+                                <button type="button" class="button button-small button-default" ng-click="base.fontBig()"><i class="fa fa-expand"></i></button>
+                                <button type="button" class="button button-small button-default" ng-click="base.fontSml()"><i class="fa fa-compress"></i></button>
+                            </div>
+                            <div class="base-top-align buttons">
+                                <button type="button" class="button button-small button-default" ng-click="base.fontWeight()"><i class="fa fa-bold"></i></button>
+                                <button type="button" class="button button-small button-default" ng-click="base.fontStyle()"><i class="fa fa-italic"></i></button>
+                                <button type="button" class="button button-small button-default" ng-click="base.fontUnderline()"><i class="fa fa-underline"></i></button>
+                            </div>
+                        </div>
+                        <div class="base-top-group">
+                            <div class="base-top-align buttons">
+                                <button type="button" class="button button-small button-default" ng-click="base.alignLeft()"><i class="fa fa-align-left"></i></button>
+                                <button type="button" class="button button-small button-default" ng-click="base.alignCenter()"><i class="fa fa-align-center"></i></button>
+                                <button type="button" class="button button-small button-default" ng-click="base.alignRight()"><i class="fa fa-align-right"></i></button>
+                                <button type="button" class="button button-small button-default" ng-click="base.alignJust()"><i class="fa fa-align-justify"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ted-base-bot">
+                        <div class="range">
+                            <i>字间宽</i>
+                            <input type="range" name="wordspace" on-drag="base.wordSpace()" min="0" max="100"  ng-model="wordspace">
+                            <i ng-bind="wordspace"></i>
+                        </div>
+                    </div>
+                    <div class="ted-base-bot">
+                        <div class="range">
+                            <i>行高</i>
+                            <input type="range" name="lineheight" on-drag="base.lineHeight()"  min="0" max="100" ng-model="lineheight">
+                            <i ng-bind="lineheight"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="ted-ctrl-li ted-ctrl-color" ng-show="menu.actItem == 'color'">
+                    <div class="ted-color-his" id="ted-color-his">
+                        <div class="ted-color-set" ng-click="color.colorReset()">复位</div>
+                        <div class="ted-color-set" ng-click="colorValue.open()">颜色值</div>
+                        <div class="ted-his-list">
+                            <div class="ted-his-li" ng-repeat="col in colorHistory.colorList" ng-style="{background:col}" ng-click="color.colorHistory($index)"></div>
+                        </div>
+                    </div>
+                    <div class="ted-color-main">
+                        <div class="ted-color-top">
+                            <ul class="color-list" id="ted-color-list">
+                                <li class="color-li" ng-repeat="col in editSet.colorList" ng-style="{background:col}" ng-click="color.colorBlock($index)"></li>
+                            </ul>
+                        </div>
+                        <div class="ted-color-bot">
+                            <div class="bot-cbox">
+                                <canvas id="bot-cbox-canvas" width="800" height="200" ng-click="color.canvasClick($event)" on-drag="color.canvasDrag($event)" on-release="color.canvasRelease()"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ted-ctrl-li ted-ctrl-effects" ng-show="menu.actItem == 'effects'">
+                    <div class="ted-effects-li">
+                        <div class="ted-effects-top">
+                            <div class="range">
+                                <i>阴影</i>
+                                <input type="range" name="shadow" min="-50" max="50" ng-model="shadow" on-drag="effects.distance()">
+                                <i ng-bind="shadow"></i>
+                            </div>
+                        </div>
+                        <div class="teb-effects-bot">
+                            <div class="eff-bot-name">
+                                <label class="toggle disable-user-behavior">
+                                    <input type="checkbox" ng-model="sToggle.tog" ng-checked="sToggle.tog" ng-click="effects.showShadow()" class="ng-untouched ng-valid ng-dirty ng-valid-parse" value="on">
+                                    <div class="track"><div class="handle"></div></div>
+                                </label>
+                            </div>
+                            <div class="eff-bot-value">
+                                <label class="toggle disable-user-behavior">
+                                    <input type="checkbox" ng-model="sToggle.btog" ng-checked="sToggle.btog" ng-click="effects.bedim()" class="ng-untouched ng-valid ng-dirty ng-valid-parse" value="on">
+                                    <div class="track"><div class="handle">M</div></div>
+                                </label>
+                            </div>
+                            <div class="eff-bot-slide">
+                                <div class="ted-color-top effects-color">
+                                    <ul class="color-list">
+                                        <li class="color-li" ng-repeat="col in editSet.colorList" ng-style="{background:col}" ng-click="effects.color($index)"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ted-ctrl-li ted-ctrl-back"  ng-show="menu.actItem == 'back'">
+                    <div class="ted-back-li ted-back-slide">
+                        <div class="back-slide-li">
+                            <div class="range">
+                                <input type="range" name="bwidth" min="0" max="100" ng-model="bwidth" on-drag="back.bwidth()">
+                            </div>
+                        </div>
+                        <div class="back-slide-li">
+                            <div class="range">
+                                <input type="range" name="bradius" min="0" max="50" ng-model="bradius" on-drag="back.bradius()">
+                            </div>
+                        </div>
+                        <div class="back-slide-li">
+                            <div class="range">
+                                <input type="range" name="bopacity" min="0" max="100" ng-model="bopacity" on-drag="back.bopacity()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ted-back-li ted-back-color">
+                        <div class="back-color-left">
+                            <div class="c-l color-border" ng-class="{true:'c-l-act'}[backType.border]" ng-click="backType.changeType()">
+                                <i class="icon ion-android-checkbox-outline-blank"></i>
+                            </div>
+                            <div class="c-l color-back" ng-class="{true:'c-l-act'}[!backType.border]" ng-click="backType.changeType()">
+                                <i class="icon ion-android-checkbox-blank"></i>
+                            </div>
+                        </div>
+                        <div class="back-color-right" ng-click="back.delBd()">
+                            <i class="icon ion-android-delete"></i>
+                        </div>
+                        <div class="back-color-center">
+                            <canvas id="back-color" width="800" height="100" ng-click="back.canvasClick($event)" on-drag="back.canvasDrag($event)" on-release="back.canvasRelease()"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="ted-ctrl-li ted-ctrl-button"  ng-show="menu.actItem == 'link'">
+                    <div class="ted-back-li ted-back-link">
+                        <span class="back-link-li back-link-icon" ng-class="{true:'back-link-act'}[link.btnLock]" ng-click="link.toggleBtn()"><i class="icon ion-link"></i></span>
+                        <span class="back-link-li back-link-hold" ng-class="{true:'back-link-act'}[link.linkLock]" ng-click="link.toggleLink()"><i class="icon ion-android-lock"></i></span>
+                        <span class="back-link-li back-link-input"><input type="text" id="btnUrl" placeholder="生成链接按钮" ng-disabled="!link.linkLock" ng-class="{true:'link-input-act'}[link.linkLock]"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="ted-color-cvbox" ng-show="colorValue.show">
+                <div class="ted-cvbox-li cvbox-li-rgb">
+                    <div class="ted-cvbox-lili">R:<input type="text" ng-model="colorValue.rgb.r" ng-change="colorValue.setRgb()"></div>
+                    <div class="ted-cvbox-lili">G:<input type="text" ng-model="colorValue.rgb.g" ng-change="colorValue.setRgb()"></div>
+                    <div class="ted-cvbox-lili">B:<input type="text" ng-model="colorValue.rgb.b" ng-change="colorValue.setRgb()"></div>
+                </div>
+                <div class="ted-cvbox-li cvbox-li-hex">
+                    <div class="ted-cvbox-lili">#:<input type="text" ng-model="colorValue.hex" ng-change="colorValue.setHex()"></div>
+                    <div class="ted-cvbox-lili"></div>
+                    <div class="ted-cvbox-lili">&nbsp;&nbsp;&nbsp;<input type="button" ng-click="colorValue.close()" value="关闭"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="text-hide-def"></div>
+</div>
+
