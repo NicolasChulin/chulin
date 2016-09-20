@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>rotate</title>
+    <title>rotate-div</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
-    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
 </head>
 <body>
     <style>
@@ -56,55 +56,33 @@
             text-align: center;
             color: #ffffff;
         }
-        .clear{
-            height: 40px;
-            padding: 10px;
-            width: 60px;
-            color: #000000;
-            background:#67b168;
-        }
-        .el-editor{
-            width: 1px;
-            height: 1px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-        .ele-editor-ctrl{
-            width: 20px;
-            height: 20px;
-            background: #03ad52;
-            position: absolute;
-            top: 20px;
-            left:120px;
-            z-index: 400;
-            margin-left: -10px;
-            margin-top: -10px;
-            border-radius: 3px;
-            text-align: center;
-            color: #ffffff;
-        }
+    .clear{
+        height: 30px;
+        padding: 10px;
+        width: 60px;
+        color: #000000;
+        background:#67b168;
+    }
     </style>
     <div class="container">
         <div class="cnd-element text-element">
             <div class="el-content">这是什么</div>
-            <div class="el-editor"></div>
         </div>
         <div class="ele-rotate-ctrl"><span class="glyphicon glyphicon-refresh"></span></div>
-        <div class="ele-editor-ctrl"><span class="glyphicon glyphicon-pencil"></span></div>
         <div class="clear">clear</div>
     </div>
     <script>
         function log(cont){
             console.log(cont);
         }
+
         $(function(){
             $('.clear').on('click',function(){
                 $('.text-element').css('transform','');
             });
 
             var bx, by, _bx, _by, barx, bary,move=false;
-                var midp={},botp={},rbotp={},movp={},rate,deg,rotate={},ddl,ths,fa,notfirst;
+            var midp={},botp={},rbotp={},movp={},rate,deg,rotate={},ddl,ths,fa,notfirst;
             /*element 移动*/
             $('.text-element').on('touchstart touchmove touchend', function (event) {
                 var e = event.originalEvent.targetTouches[0];
@@ -161,16 +139,10 @@
                         ths.data('botp',botp);
                         ths.data('rbotp',rbotp);
                         ths.data('midp',midp);
-//                        log('move--------------------');
                     }else{
-//                        log('click--------------------');r
                         $('.ele-rotate-ctrl').animate({left:rbotp.left+'px',top:rbotp.top+'px'},100);
                     }
                     move = false;
-//                    log('midp');
-//                    log(midp);
-//                    log('botp');
-//                    log(botp);
                 }
             });
 
@@ -179,22 +151,13 @@
                 event.stopPropagation();
                 if (event.type == "touchstart"){
                     fa = $('.text-element');
-//                    notfirst = fa.data('notfirst');
                     botp= fa.data('botp');
                     midp= fa.data('midp');
                     rbotp= fa.data('rbotp');
-//                    rotate = fa.data('rdata');
                     ddl = fa.data('dlength');
-//                    $('.ele-rotate-ctrl').css({left:rbotp.left+'px',top:rbotp.top+'px'});
                     _bx = e.pageX;
                     _by = e.pageY;
-                    log('rotata-start--------------------');
-                    log('rdata');
-                    log(rotate);
-                    log('midp');
-                    log(midp);
-                    log('botp');
-                    log(botp);
+
                 } else if (event.type == "touchmove") {
                     event.preventDefault();
                     move = true;
@@ -213,14 +176,12 @@
                         }else{
                             ndeg = 180*ndeg/Math.PI;
                         }
+
                         ndeg = keepTwoValid(ndeg);
                         nrate = keepTwoValid(nrate);
                         var tranf = 'rotate('+ndeg+'deg) scale('+nrate+')';
                         fa.css({'transform':tranf});
                         $('.ele-rotate-ctrl').css({left:movp.left+'px',top:movp.top+'px'});
-                        var editorp = $('.el-editor').offset();
-                        $('.ele-editor-ctrl').css({left:keepTwoValid(editorp.left)+'px',top:keepTwoValid(editorp.top)+'px'});
-//                        log('left:'+editorp.left+',top:'+editorp.top);
                     }
                 } else {
                     if(move){
@@ -229,9 +190,7 @@
                         fa.data('rbotp',rbotp);
                     }
                     move = false;
-                    log('rotate-end--------------------');
-                    log('botp');
-                    log(movp);
+
                 }
 
             });
@@ -253,27 +212,6 @@
                 return num.toFixed(4);
             }
 
-//            $('.text-element').on('click',function(){
-//                var ths = $(this);
-//                ths.children('.el-rotate').show();
-//                if($.isEmptyObject(ths.data('botp'))){
-//                    var eleft = parseInt(ths.css('left'));
-//                    var etop = parseInt(ths.css('top'));
-//                    var ewidth = parseInt(ths.outerWidth());
-//                    var eheight = parseInt(ths.outerHeight());
-//                    midp.left = eleft+ewidth/2;
-//                    midp.top = etop+eheight/2;
-//                    botp.left = eleft+ewidth;
-//                    botp.top = etop+eheight;
-//                    ths.data('botp',botp);
-//                    ths.data('midp',midp);
-//                }else{
-//                    botp = ths.data('botp');
-//                    midp = ths.data('midp');
-//                }
-//                log('click--------------------');
-//                log(botp);
-//            });
         });
     </script>
 

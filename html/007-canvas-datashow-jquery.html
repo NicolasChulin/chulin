@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>statistics</title>
+    <title>canvas-datashow-jquery</title>
     <meta name="viewport" content="width=device-width,user-scalable=no">
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
-    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugin/fontawesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
 
 </head>
 <body>
@@ -271,6 +271,7 @@
                         }
                     },10);
                 }
+
                 $this.each(function(index){
                     var ths = $(this).children('.canvas').get(0);
                     var context = ths.getContext('2d');

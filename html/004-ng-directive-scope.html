@@ -2,10 +2,10 @@
 <html lang="en"  ng-app="myapp">
 <head>
     <meta charset="UTF-8">
-    <title>gn-dom</title>
+    <title>ng-directive-scope</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
-    <script type="text/javascript" src="lib/js/angular.js"></script>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/js/angular.js"></script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
 </head>
 <body ng-controller="myctrl">
@@ -22,6 +22,7 @@
         width: 50%;
     }
 </style>
+
     <div class="container">
         <div class="jumbotron">
             <h2>{{parentVar}}</h2>
@@ -46,6 +47,7 @@
         </div>
 
     </div>
+    
 <script>
     var app = angular.module('myapp',[]);
     app.directive('progerss',function(){
