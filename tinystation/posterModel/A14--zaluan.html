@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>杂乱</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .yunye-template {
+            position: relative;
+            z-index: 20;
+            /* padding-bottom: 120%; */
+            width: 100%;
+            height: 504px;
+            transform-origin: top left;
+            -webkit-transform-origin: top left;
+            -moz-transform-origin: top left;
+            -o-transform-origin: top left;
+            -ms-transform-origin: top left;
+            transform: scale(1) !important;
+            -webkit-transform: scale(1) !important;
+            background-size: 100% 100% !important;
+        }
+
+        .yunye-template> .content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .yunye-template> .content> div {
+            overflow: hidden;
+        }
+
+        .yunye-template .cnns1 {
+            background-color: rgba(0, 174, 149, 1);
+        }
+
+        .yunye-template .cnns2 {
+            background-color: rgba(28, 138, 127, 0.5);
+        }
+
+        .yunye-template .cnns3 {
+            background-color: rgba(255, 118, 116, 0.68);
+        }
+
+        .yunye-template .cnns4 {
+            background-color: rgba(187, 130, 255, 0.95);
+        }
+
+        .yunye-template .cnns5 {
+            background-color: rgba(247, 255, 93, 0.65);
+        }
+
+        .content-1 {
+            -webkit-clip-path: url(#content-1);
+            clip-path: url(#content-1);
+            position: absolute;
+            width: 77%;
+            height: 23.9%;
+            left: 18.7%;
+            top: 0px;
+        }
+        .content-2 {
+            -webkit-clip-path: url(#content-2);
+            clip-path: url(#content-2);
+            position: absolute;
+            width: 48%;
+            height: 81.8%;
+            right: 0px;
+            top: 2.6%;
+        }
+        .content-3{
+             -webkit-clip-path: url(#content-3);
+            clip-path: url(#content-3);
+            position: absolute;
+            width: 81.9%;
+            height: 88.3%;
+            left: 0px;
+            top: 6.5%;
+        }
+        .content-4{
+             -webkit-clip-path: url(#content-4);
+            clip-path: url(#content-4);
+            position: absolute;
+            width: 49.5%;
+            height: 20.2%;
+            right: 0px;
+            bottom: 0px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="yunye-template">
+    <div class="content">
+
+        <div class="content-1 cnns1"></div>
+        <div class="content-2 cnns2"></div>
+        <div class="content-3 cnns3"></div>
+        <div class="content-4 cnns4"></div>
+
+        <!-- svg -->
+        <svg class="clip-svg" id="svg" preserveAspectRatio="none" viewBox="0 0 1 1">
+            <defs>
+                <clipPath id="content-1" clipPathUnits="objectBoundingBox">
+                    <path d="M0.327 0,L1 0,L1 0.111,L0.4 1,L0 0.482z " fill="pink"></path>
+                </clipPath>
+                <clipPath id="content-2" clipPathUnits="objectBoundingBox">
+                    <path d="M1 0,L0 0.27,L0.683 0.415,L0.683 0.92,1 1z" fill="pink"></path>
+                </clipPath>
+                <clipPath id="content-3" clipPathUnits="objectBoundingBox">
+                    <path d="M0 0,L1 0.361,L1 0.81,L0.625 1,0 0.786z" fill="pink"></path>
+                </clipPath>
+                <clipPath id="content-4" clipPathUnits="objectBoundingBox">
+                    <path d="M1 0.339,L0.68 0,L0 0.9,L0 1,1 1z " fill="pink"></path>
+                </clipPath>
+            </defs>
+        </svg>
+    </div>
+</div>
+
+
+</body>
+</html>
