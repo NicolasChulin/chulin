@@ -1,0 +1,24 @@
+body{
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Microsoft Yahei';
+    background: #c0c0c0;
+    color:#666;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color:#666;
+}
+ul{
+    list-style-type: none;
+}
+img{
+    display: block;
+    width: 100%;
+    height: 100%;
+
+}

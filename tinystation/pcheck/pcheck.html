@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>poster check</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="../../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugin/fontawesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="pcheck.js"></script>
+    <link rel="stylesheet" type="text/css" href="pcheck.css">
+</head>
+<body>
+    <div class="ch-main">
+        <div class="main-top">
+            <ul class="main-top-list">
+                <li class="cl_act" data-type="uncheck">未审核</li>
+                <li data-type="checked">已审核</li>
+            </ul>
+        </div>
+        <input type="hidden" id="ss_cont">
+        <input type="hidden" id="ss_score">
+        <div class="main-body main-uncheck" id="main-uncheck">
+            <ul>
+                <li class="mb-poster">
+                    <div class="mb-poster-img">
+                        <img src="../../images/poster_view.jpg">
+                    </div>
+                    <div class="mb-poster-content">
+                        <div class="mb-poster-info">
+                            <h3 class="p-title">一个很长的标题sdsfsdfsdfsdfsdfsdfsd</h3>
+                            <p class="p-description">这是一段美丽的文字，好好欣赏</p>
+                            <div class="p-info-bot">
+                                <p class="p-creator">自然是我</p>
+                                <p class="p-time">2016-10-27 10:39:45</p>
+                            </div>
+                        </div>
+                        <div class="mb-poster-ctrl" data-id="1">
+                            <div class="mb-waiting"></div>
+                            <div class="mb-poster-score">
+                                <p class="s-title">审核：</p>
+                                <ul class="s-li s-select-cont clear">
+                                    <li data-var="ok">合格</li>
+                                    <li data-var='no'>不合格</li>
+                                </ul>
+                                <p class="s-title">评分:</p>
+                                <ul class="s-li s-score-num clear">
+                                    <li data-var="1">1</li>
+                                    <li data-var="2">2</li>
+                                    <li data-var="3">3</li>
+                                    <li data-var="4">4</li>
+                                    <li data-var="5">5</li>
+                                    <li data-var="6">6</li>
+                                    <li data-var="7">7</li>
+                                    <li data-var="8">8</li>
+                                    <li data-var="9">9</li>
+                                    <li data-var="10">10</li>
+                                </ul>
+                            </div>
+                            <div class="mb-poster-tips"></div>
+                            <div class="mb-poster-btn clear">
+                                <button type="button" class="btn btn-danger btn_delete">删除</button>
+                                <button type="button" class="btn btn-primary btn_sub">确定</button>
+                                <button type="button" class="btn btn-primary btn_reset">重新打分</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="main-body main-checked" id="main-checked">
+            <ul>
+                <li class="mb-poster">
+                    <div class="mb-poster-img">
+                        <img src="../../images/poster_view.jpg">
+                    </div>
+                    <div class="mb-poster-content">
+                        <div class="mb-poster-info">
+                            <h3 class="p-title">一个很长的标题sdsfsdfsdfsdfsdfsdfsd</h3>
+                            <p class="p-description">这是一段美丽的文字，好好欣赏</p>
+                            <div class="p-info-bot">
+                                <p class="p-creator">自然是我</p>
+                                <p class="p-time">2016-10-27 10:39:45</p>
+                            </div>
+                        </div>
+                        <div class="mb-poster-ctrl" data-id="2">
+                            <div class="mb-waiting"></div>
+                            <div class="mb-poster-score">
+                                <p class="s-title">审核：</p>
+                                <ul class="s-li s-select-cont clear">
+                                    <li data-var="ok">合格</li>
+                                    <li data-var='no'>不合格</li>
+                                </ul>
+                                <p class="s-title">评分:</p>
+                                <ul class="s-li s-score-num clear">
+                                    <li data-var="1">1</li>
+                                    <li data-var="2">2</li>
+                                    <li data-var="3">3</li>
+                                    <li data-var="4">4</li>
+                                    <li data-var="5">5</li>
+                                    <li data-var="6">6</li>
+                                    <li data-var="7">7</li>
+                                    <li data-var="8">8</li>
+                                    <li data-var="9">9</li>
+                                    <li data-var="10">10</li>
+                                </ul>
+                            </div>
+                            <div class="mb-poster-tips"></div>
+                            <div class="mb-poster-btn clear">
+                                <button type="button" class="btn btn-danger btn_delete">删除</button>
+                                <button type="button" class="btn btn-primary btn_sub">确定</button>
+                                <button type="button" class="btn btn-primary btn_reset">重新打分</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+        <div class="mb-page-list">
+            <ul>
+                <li>上一页</li>
+                <li>下一页</li>
+            </ul>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
