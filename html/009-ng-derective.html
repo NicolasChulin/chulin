@@ -13,17 +13,19 @@
 		<br>
 		<br>
 		<change-dom type="two"></change-dom>
+		<div class="change-dom" type="one"></div>
 	</div>
 
 	<script>
 		var app = angular.module('app',[]);
 		app.controller('NewDireController',function($scope){
 			$scope.tim = '2016-11-13';
+			$scope.dirname = 'change-dom';
 		});
 		app.directive('changeDom',function(){
 			
 			return {
-				'restrict':'E',
+				'restrict':'EC',
 				'replace':false,
 				'compile':function($element,$attrs){
 					if($attrs.type == 'one'){
