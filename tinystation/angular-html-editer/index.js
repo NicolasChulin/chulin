@@ -74,7 +74,7 @@ app.factory('editFuncConfigService',function(){
 
 app.controller('NewDireController',function($scope,editFuncConfigService){
 	$scope.editFuncConfig = editFuncConfigService.getConfig();
-    $scope.showEditPanel = 'text';
+    $scope.showEditPanel = '';
     $scope.elems = [];
 
     $scope.actEle = '';
@@ -86,7 +86,8 @@ app.controller('NewDireController',function($scope,editFuncConfigService){
     $scope.addElement =function(eledata){
 		var obj = editFuncConfigService.getData(eledata.type);
 		var objnew = {};
-        obj['nid']=$scope.elems.length;
+        obj['nid']=$scope.elems.length+1;
+        obj['style']['z-index']=$scope.elems.length+1;
         angular.copy(obj, objnew);
         $scope.elems.push(objnew);
         $scope.actElement(objnew);

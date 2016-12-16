@@ -23,6 +23,7 @@ app.directive('moveEle',function () {
                         'top':($scope.ele.style['left'])?parseInt($scope.ele.style['top']):0
                     }
                     move = true;
+                    $element.css({'z-index':999});
                 } else if (e.type == "mousemove") {
                     if (move){
                         sx = e.pageX - _bx + elep.left;
@@ -33,6 +34,7 @@ app.directive('moveEle',function () {
                     move = false;
                     $scope.ele.style['left']=sx+'px';
                     $scope.ele.style['top']=sy+'px';
+                    $element.css({'z-index':$scope.ele['nid']});
                 }
             });
         }
