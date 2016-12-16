@@ -1,0 +1,15 @@
+<div class="ng-editer-panel ng-editer-image">
+    <div class="nged-header">
+        <span>image edit</span>
+    </div>
+    <div class="nged-main">
+        <div class="nged-list nged-images">
+            <div class="image-item" ng-repeat="m in images" ng-click="selectImage(m)">
+                <img ng-src="{{m.src_nail}}" alt="image">
+            </div>
+        </div>
+    </div>
+    <div class="nged-footer">
+        <div class="ed-confirm" ng-click="resetImage()">reset</div>
+    </div>
+</div>

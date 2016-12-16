@@ -1,3 +1,9 @@
+var ROOT_CONFIG = {
+//    domain: "http://localhost:8000"
+    domain: "http://192.168.153.128:8000",
+    // domain: "http://www.yunye123.com:8000",
+//    domain: "http://www.yunye123.com",
+};
 
 var app = angular.module('app',[]);
 app.factory('editFuncConfigService',function(){
@@ -11,25 +17,47 @@ app.factory('editFuncConfigService',function(){
     ];
     var eleDefaultData = {
     	'text':{
-    		'num':0,
+    		'nid':0,
             'type':'text',
             'content':'一个文字',
             'style':{
                 'font-size':'16px',
-                'color':'red'
+                'color':'red',
+                'width':'100px',
+                'height':'30px'
             },
             'func':{}
 		},
 		'image':{
-            'num':0,
+            'nid':0,
             'type':'image',
-            'src':'../../images/eventree.jpg',
+            'src':'../../images/pcimgs/002.jpg',
             'style':{
-                'font-size':'16px',
-                'color':'red'
+                'width':'200px',
+                'height':'150px'
             },
             'func':{}
-		}
+		},
+        'video':{
+            'nid':0,
+            'type':'video',
+            'src':'../../images/pcimgs/004.jpg',
+            'style':{
+                'width':'200px',
+                'height':'150px'
+            },
+            'func':{}
+        },
+        'svg':{
+            'nid':0,
+            'type':'svg',
+            'content':'haochang de wenti',
+            'style':{
+                'width':'200px',
+                'height':'150px'
+            },
+            'func':{}
+        }
     };
     return {
         'getConfig':function () {
@@ -58,7 +86,7 @@ app.controller('NewDireController',function($scope,editFuncConfigService){
     $scope.addElement =function(eledata){
 		var obj = editFuncConfigService.getData(eledata.type);
 		var objnew = {};
-        obj['num']=$scope.elems.length;
+        obj['nid']=$scope.elems.length;
         angular.copy(obj, objnew);
         $scope.elems.push(objnew);
         $scope.actElement(objnew);
