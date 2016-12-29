@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<title>011-ng-pages-change</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <link rel="stylesheet" href="../plugin/fontawesome/css/font-awesome.min.css">
+</head>
+<body ng-controller="AppController">
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing:border-box;
+    }
+    body{
+        position: absolute;
+        width:100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    .main{
+        position: relative;
+        width:100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        color: #fff;
+        overflow: hidden;
+    }
+    .slide-main{
+        white-space: nowrap;
+        position: relative;
+        left: 0;
+        top: 0;
+        width:auto;
+        height: 100%;
+        font-size: 0;
+        transition: all 0.5s;
+    }
+    .slide-main-li{
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        vertical-align: middle;
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .slide-main-li p{
+        position: absolute;
+        height: 40px;
+        width: 100%;
+        line-height: 40px;
+        top: 50%;
+        margin-top:-20px;
+    }
+    .slide-main-li-1{
+        background-color: #FF9966;
+    }
+    .slide-main-li-2{
+        background-color:#FF6666;
+    }
+    .slide-main-li-3{
+        background-color:#FFCCCC;
+    }
+    .slide-ctrl{
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+        padding: 5px;
+        text-align: center;
+        margin-top: -20px;
+        text-shadow: 0 0 5px #333;
+    }
+    .slide-left{
+        left: 0;
+    }
+    .slide-right{
+        right: 0;
+    }
+    
+</style>
+    
+<div class="main" slide-show>
+    <div class="slide-main-li slide-main-li-1"><p>这是page1</p></div>
+    <div class="slide-main-li slide-main-li-2"><p>这是page2</p></div>
+    <div class="slide-main-li slide-main-li-3"><p>这是page3</p></div>
+</div>
+<script>
+    var app = angular.module('app',[]);
+    app.controller('AppController',function($scope){
+
+    });
+    app.directive('slideShow',function(){
+
+        return {
+            'template':'<div class="slide-main" ng-transclude ng-style="style"></div>' +
+                '<div class="slide-ctrl slide-left" ng-click="slideLeft()"><i class="fa fa-angle-double-left"></i></div>' +
+                '<div class="slide-ctrl slide-right" ng-click="slideRight()"><i class="fa fa-angle-double-right"></i></div>',
+            'transclude': true,
+            'restrict':'AC',
+            'scope':{},
+            'link':function($scope,$ele,$attr){
+
+                $scope.page = 1;
+                $scope.style = {};
+
+                var mwidth = $ele[0].clientWidth;
+                var pnum = $ele.children('.slide-main').length;
+//                console.log(mwidth);
+//
+                $scope.slideLeft = function(){
+                    if($scope.page == 1){
+                        $scope.page = pnum;
+                    }else{
+                        $scope.page--;
+                    }
+                    $scope.style['left'] =  ($scope.page-1)*(-mwidth)+'px';
+                }
+                $scope.slideRight =function(){
+                    if($scope.page == pnum){
+                        $scope.page = 1;
+                    }else{
+                        $scope.page++;
+                    }
+                    $scope.style['left'] =  ($scope.page-1)*(-mwidth)+'px';
+                }
+            }
+        };
+    });
+</script>
+
+</body>
+</html>

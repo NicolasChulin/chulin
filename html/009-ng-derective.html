@@ -29,7 +29,7 @@
 				'replace':false,
 				'compile':function($element,$attrs){
 					if($attrs.type == 'one'){
-						$element.append('<div class="one">one--{{tim}}</div>');
+						$element.append('<div class="one" >one--{{tim}}</div>');
 					}else{
 						$element.append('<div class="two">two--{{tim}}</div>');
 					}
@@ -37,6 +37,16 @@
 					return function($scope,$element,$attrs){
 
 					}
+				}
+			}
+		});
+		app.directive('one',function(){
+			return {
+				'restrict':'EC',
+				'replace':false,
+				'template':'<span>haha</span>',
+				'link':function($scop,$el,$attr){
+
 				}
 			}
 		});
