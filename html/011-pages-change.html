@@ -66,7 +66,7 @@
         background-color:#FF6666;
     }
     .slide-main-li-3{
-        background-color:#FFCCCC;
+        background-color: #ff7d91;
     }
     .slide-ctrl{
         position: absolute;
@@ -85,6 +85,41 @@
     .slide-right{
         right: 0;
     }
+
+    @keyframes moveRight {
+        0% {
+            opacity: 0;
+            right: 10px;
+        }
+        70% {
+            opacity: 1;
+            right: -5px;
+        }
+        100%{
+            opacity: 0;
+            right: -15px;
+        }
+    }
+    @keyframes moveLeft {
+        0% {
+            opacity: 0;
+            left: 10px;
+        }
+        50% {
+            opacity: 1;
+            left:-5px;
+        }
+        100%{
+            opacity: 0;
+            left:-15px;
+        }
+    }
+    .ani-move-right{
+        animation:moveRight 1.4s infinite;
+    }
+    .ani-move-left{
+        animation:moveLeft 1.4s infinite;
+    }
     
 </style>
     
@@ -92,6 +127,12 @@
     <div class="slide-main-li slide-main-li-1"><p>这是page1</p></div>
     <div class="slide-main-li slide-main-li-2"><p>这是page2</p></div>
     <div class="slide-main-li slide-main-li-3"><p>这是page3</p></div>
+    <div class="slide-main-li slide-main-li-2"><p>这是page4</p></div>
+    <div class="slide-main-li slide-main-li-1"><p>这是page5</p></div>
+    <div class="slide-main-li slide-main-li-2"><p>这是page6</p></div>
+    <div class="slide-main-li slide-main-li-3"><p>这是page7</p></div>
+    <div class="slide-main-li slide-main-li-2"><p>这是page8</p></div>
+    <div class="slide-main-li slide-main-li-1"><p>这是page9</p></div>
 </div>
 <script>
     var app = angular.module('app',[]);
@@ -101,9 +142,9 @@
     app.directive('slideShow',function(){
 
         return {
-            'template':'<div class="slide-main" ng-transclude ng-style="style"></div>' +
-                '<div class="slide-ctrl slide-left" ng-click="slideLeft()"><i class="fa fa-angle-double-left"></i></div>' +
-                '<div class="slide-ctrl slide-right" ng-click="slideRight()"><i class="fa fa-angle-double-right"></i></div>',
+            'template':'<div class="slide-main" ng-transclude ng-style="style" ></div>' +
+                '<div class="slide-ctrl slide-left ani-move-left" ng-click="slideLeft()"><i class="fa fa-angle-double-left"></i></div>' +
+                '<div class="slide-ctrl slide-right ani-move-right" ng-click="slideRight()"><i class="fa fa-angle-double-right"></i></div>',
             'transclude': true,
             'restrict':'AC',
             'scope':{},
@@ -113,9 +154,9 @@
                 $scope.style = {};
 
                 var mwidth = $ele[0].clientWidth;
-                var pnum = $ele.children('.slide-main').length;
-//                console.log(mwidth);
-//
+                var pnum = $ele.children().children().length - 2;
+//                console.log(pnum);
+
                 $scope.slideLeft = function(){
                     if($scope.page == 1){
                         $scope.page = pnum;
