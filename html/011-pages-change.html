@@ -139,7 +139,7 @@
     app.controller('AppController',function($scope){
 
     });
-    app.directive('slideShow',function(){
+    app.directive('slideShow',function($timeout){
 
         return {
             'template':'<div class="slide-main" ng-transclude ng-style="style" ></div>' +
@@ -147,16 +147,38 @@
                 '<div class="slide-ctrl slide-right ani-move-right" ng-click="slideRight()"><i class="fa fa-angle-double-right"></i></div>',
             'transclude': true,
             'restrict':'AC',
-            'scope':{},
+            'scope':{
+            },
             'link':function($scope,$ele,$attr){
 
                 $scope.page = 1;
-                $scope.style = {};
+                $scope.style = {
+                    'left':'0px'
+                };
 
                 var mwidth = $ele[0].clientWidth;
                 var pnum = $ele.children().children().length - 2;
 //                console.log(pnum);
 
+                /* 自动翻页 */
+                var autoPlay = function(auto,time){
+                    if(auto == 'auto'){
+                        time = parseInt(time)&&parseInt(time)>3000?parseInt(time):3000;
+                        $scope.pmise = $timeout(function(){
+                            $scope.slideRight();
+                        },time);
+                    }else{
+                        return;
+                    }
+                }
+                var cancelPlay = function(){
+                    if($scope.pmise){
+                        $timeout.cancel($scope.pmise);
+                    }
+                }
+                autoPlay($attr.auto,$attr.time);
+
+                /* 左右翻页 */
                 $scope.slideLeft = function(){
                     if($scope.page == 1){
                         $scope.page = pnum;
@@ -164,6 +186,8 @@
                         $scope.page--;
                     }
                     $scope.style['left'] =  ($scope.page-1)*(-mwidth)+'px';
+                    cancelPlay();
+                    autoPlay($attr.auto,$attr.time);
                 }
                 $scope.slideRight =function(){
                     if($scope.page == pnum){
@@ -172,7 +196,46 @@
                         $scope.page++;
                     }
                     $scope.style['left'] =  ($scope.page-1)*(-mwidth)+'px';
+                    cancelPlay();
+                    autoPlay($attr.auto,$attr.time);
                 }
+
+                /* 滑动事件 */
+                var move = false,_bx,move_dis,left;
+                $ele.on('touchstart touchmove touchend',function(event){
+//                    console.log(event);
+                    if (event.type == 'touchstart'){
+                        move = true;
+                        _bx = event.targetTouches[0].pageX;
+                        left = $scope.style['left'];
+                    }else if(event.type == 'touchmove'){
+                        if(move){
+                            cancelPlay();
+                            move_dis = event.targetTouches[0].pageX - _bx;
+                            $scope.style['left'] = (parseInt(left) + move_dis) +'px';
+                        }
+                        console.log($scope.style['left']);
+
+                    }else{
+
+                        if(move_dis>0){
+                            if(move_dis>=mwidth/3){
+                                $scope.slideLeft();
+                            }else{
+                                $scope.style['left'] = left;
+                            }
+                        }else{
+                            if(move_dis<-mwidth/3){
+                                $scope.slideRight();
+                            }else{
+                                $scope.style['left'] = left;
+                            }
+                        }
+                        move = false;
+                        left = move_dis = _bx = 0;
+                    }
+                });
+
             }
         };
     });
