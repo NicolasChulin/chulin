@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ds_poster</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../plugin/font-awesome-4.7.0/css/font-awesome.css">
+</head>
+<body>
+    <style>
+        .dsp_container{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        .dsp_top{
+            position: relative;
+            top: 0;
+            left: 0;
+            height: 62.5%;
+            background-image: url('../images/ds_poster/dsen-012.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            color: #fff;
+            text-align: center;
+        }
+        .dsp-tel{
+            position: absolute;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            font-size: 16px;
+        }
+        .dsp-tel .fa{
+            font-size: 25px;
+            transform: rotate(-45deg);
+        }
+        .dsp-tel a{
+            color: #fff;
+            margin: 0 5px;
+        }
+        .dsp-addr{
+            position: absolute;
+            width: 100%;
+            height: 24px;
+            line-height: 24px;
+            bottom: 10px;
+            left: 0;
+            font-size: 10px;
+        }
+        .dsp_bot ul{
+            padding: 20px 17px;
+            overflow: hidden;
+        }
+
+        .dsp_bot li{
+            width: 25%;
+            height: 0;
+            padding-bottom: 44.44%;
+            float: left;
+            position: relative;
+        }
+        .dsp_bot li a{
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 2px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: auto;
+        }
+        .dsp_bot li img{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .dsp_bot .dsp-bot-li-name{
+            width: 100%;
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            z-index: auto;
+            text-align: center;
+            font-size: 14px;
+            padding: 0 2px;
+        }
+        .dsp_bot .dsp-bot-li-name span{
+            display: block;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+            background: rgba(255,0,0,.8);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .sep-bdmap-show{
+            position: fixed ;
+            width: 100% ;
+            height: 100% ;
+            z-index: 99 ;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+        .map_show{
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 2;
+            top: 0px !important;
+            left: 0px !important;
+        }
+        .closeMap{
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 15px;
+            left: 15px;
+            z-index: 3;
+            font-size: 26px;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+    </style>
+    <div class="dsp_container">
+        <div class="dsp_top">
+            <div class="dsp-tel">
+                <i class="fa fa-volume-control-phone"></i>
+                <a href="tel:02786711666">027-86711666</a>
+                <a href="tel:02786712666">027-86712666</a>
+            </div>
+            <div class="dsp-addr" onclick="loadingMap(event);">地址：武汉市洪山区野芷湖西路16号创意天地11栋12楼</div>
+        </div>
+        <div class="dsp_bot">
+            <ul id="dsp-list">
+            </ul>
+        </div>
+        <div class="sep-bdmap-show" id="sep-bdmap-show">
+            <div class="closeMap" onclick="closeMap();"><i class="fa fa-angle-left"></i></div>
+            <div id="map_show" class="map_show"></div>
+        </div>
+
+    </div>
+
+    <script>
+        $(function(){
+            var get_latest_data = function(){
+                var def_snapshot = "/static/account/img/poster_default.jpg";
+                $.ajax({
+                    url:'http://192.168.244.128:8000/cgi_exter/posters/latest',
+                    method:'get',
+                    success:function(data){
+                        var len = data.length;
+                        if(len>0){
+                            var lists = '';
+                            for(var i=0;i<data.length;i++){
+                                var url = ROOT_CONFIG.domain+'/#/poster/show/'+data[i].poster.id;
+                                lists += '<li>';
+                                lists += '<a href="'+url+'"><img src="'+data[i].poster.snapshot+'" alt="dsp-snapshot" onerror="javascript:this.src=\''+def_snapshot+'\';"></a>';
+                                lists += '<div class="dsp-bot-li-name"><span>'+data[i].title+'</span></div>';
+                                lists += '</li>';
+                            }
+                            $('#dsp-list').empty().append($(lists));
+                        }else{
+                            $('#dsp-list').after('<div>没有任何数据~~~</div>');
+                        }
+                    },
+                    error:function(data){
+                        $('#dsp-list').after('<div>没有任何数据~~~</div>');
+                    }
+                });
+            }
+            get_latest_data();
+        });
+        function closeMap(){
+            var sep = document.getElementById('sep-bdmap-show');
+            sep.style.display='none';
+        }
+        function loadingMap(event){
+            document.getElementById('sep-bdmap-show').style.display='block';
+            event = event ? event : window.event;
+            var obj = event.srcElement ? event.srcElement : event.target;
+            var _localAdress = obj.innerHTML;
+            console.log(_localAdress);
+            var oldScript = document.getElementById("baiduMapScript");
+            if(oldScript){
+                document.body.removeChild(oldScript.nextSibling);
+                document.body.removeChild(oldScript);
+            }
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.id = "baiduMapScript";
+            script.src = "http://api.map.baidu.com/api?v=2.0&ak=C5LOoqZmix3NyQn11w5z8IEzh1M57Rry&callback=init";
+            document.body.appendChild(script);
+
+            window.init = function() {
+                setTimeout(function(){
+
+                    window.baiduMap = new BMap.Map("map_show");		// 创建Map实例
+                    baiduMap.addControl(new BMap.NavigationControl());
+                    baiduMap.addControl(new BMap.OverviewMapControl());
+                    baiduMap.addControl(new BMap.ScaleControl());
+
+                    var local = new BMap.LocalSearch(baiduMap, { //智能搜索
+                        onSearchComplete: function(){
+                            if( !local.getResults() ) return;
+                            if( local.getResults().getPoi(0) ){
+                                var pp = local.getResults().getPoi(0).point;	//获取第一个智能搜索的结果
+                                window.zoomMap = function(){
+                                    baiduMap.centerAndZoom(pp, 14);
+                                };
+                                baiduMap.centerAndZoom(pp, 14);
+                                baiduMap.addOverlay(new BMap.Marker(pp));	//添加标注
+
+                                if( $("#map_show").width()===100 ){
+                                    $(".icon.ico-address").off("click").on("click",function(){
+                                        var t = setInterval(function(){
+                                            if($("#map_show").width()!==100) {
+                                                baiduMap.centerAndZoom(pp, 14);
+                                                clearInterval(t);
+                                            }
+                                        },50);
+                                        $(".icon.ico-address").off("click");
+                                    });
+                                }
+                                window.addressCorrect = true;
+                            }else{
+                                var geolocation = new BMap.Geolocation();
+                                geolocation.getCurrentPosition(function(r){
+                                    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                                        var mk = new BMap.Marker(r.point);
+                                        baiduMap.addOverlay(mk);
+                                        baiduMap.centerAndZoom(r.point, 14);
+
+                                        if( $("#map_show").width()===100 ){
+                                            $(".icon.ico-address").off("click").on("click",function(){
+                                                var t = setInterval(function(){
+                                                    if($("#map_show").width()!==100) {
+                                                        baiduMap.centerAndZoom(r.point, 14);
+                                                        clearInterval(t);
+                                                    }
+                                                },50);
+                                                $(".icon.ico-address").off("click");
+                                            });
+                                        }
+                                        window.zoomMap = function(){
+                                            baiduMap.centerAndZoom(r.point, 14);
+                                        };
+                                    }else {
+                                        local.search("光谷");
+                                    }
+                                },{enableHighAccuracy: true});
+                            }
+                        }
+                    });
+                    local.search(_localAdress);
+                    baiduMap.enableScrollWheelZoom();
+
+                },1000);
+
+            } ;
+        }
+
+    </script>
+
+</body>
+</html>

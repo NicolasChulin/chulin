@@ -257,8 +257,8 @@
                             $nobj.html(anum);
 
                             context.beginPath();
-                            context.lineWidth=20;
-                            context.arc(60, 60, 40, -Math.PI*0.5, -Math.PI*0.5+Math.PI*2*ptm/100, false);
+                            context.lineWidth=10;
+                            context.arc(60, 60, 50, -Math.PI*0.5, -Math.PI*0.5+Math.PI*2*ptm/100, false);
                             context.strokeStyle= idata.color;
                             context.stroke();
                             showProcess(context,idata,$nobj,ptm);
@@ -277,8 +277,8 @@
                     var context = ths.getContext('2d');
                     context.clearRect(0,0,120,120);
                     context.beginPath();
-                    context.lineWidth=20;
-                    context.arc(60,60,40,0,Math.PI*2,false);
+                    context.lineWidth=10;
+                    context.arc(60,60,50,0,Math.PI*2,false);
                     context.strokeStyle = '#666769';
                     context.stroke();
                     showProcess(context,opt[index],$(this).children('.st-cv-num'),0);

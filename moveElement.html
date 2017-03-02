@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>move element</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <script type="text/javascript" src="lib/js/jquery.js"></script>
+</head>
+<body>
+<style>
+    body{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #f0f0f0;
+    }
+    .ele{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: #ff0000;
+        top: 50px;
+        left: 50px;
+    }
+</style>
+    <div class="ele"></div>
+
+<script>
+    $(function(){
+        /*element 移动*/
+        var bx, by, _bx, _by, eleft, etop,move=false;
+        $('.ele').on('touchstart touchmove touchend',function(event){
+            event.stopPropagation();
+            var ths = $(this);
+            var e = event.originalEvent.targetTouches[0];
+            if (event.type == "touchstart"){
+                _bx = e.pageX;
+                _by = e.pageY;
+                eleft = parseInt(ths.css('left'));
+                etop = parseInt(ths.css('top'));
+            } else if (event.type == "touchmove") {
+                event.preventDefault();
+                move = true;
+                if (move){
+                    bx = e.pageX;
+                    by = e.pageY;
+                    var sx = bx - _bx + eleft;
+                    var sy = by - _by + etop;
+                    ths.css({'left': sx + 'px', 'top': sy + 'px'});
+                }
+            }else{
+                move = false;
+            }
+        });
+    });
+</script>
+</body>
+</html>

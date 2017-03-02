@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>two-fingel-ctrl</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+    <style>
+        body{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            color: #333333;
+            overflow: scroll;
+        }
+        .container{
+            position: relative;
+            width:100px;
+            height: 100px;
+            top: 50%;
+            left: 50%;
+            background: #ff0000;
+            transform: translate(-50%,-50%);
+        }
+
+    </style>
+
+    <div class="container"></div>
+
+    <script>
+        $(function(){
+            var is_touch=false,st_points={},width;
+            $(document).on('touchstart touchmove touchend',function($event){
+                $event.stopPropagation();
+                $event.preventDefault();
+//                console.log($event);
+                if($event.type == 'touchstart'){
+                    if($event.originalEvent.touches.length>=2){
+                        is_touch = true;
+                        st_points = $event.originalEvent.touches;
+                        width = parseFloat($('.container').width());
+                    }
+                }else if($event.type == 'touchmove'){
+                    if($event.originalEvent.touches.length>=2 && is_touch){
+                        var now_points = $event.originalEvent.touches;
+                        var scale = getDistance(now_points[0],now_points[1])/getDistance(st_points[0],st_points[1]);
+                        var leng = width*scale;
+                        $('.container').css({'width':leng+'px','height':leng+'px'});
+//                        $('body').append($('<p>'+leng+'</p>'));
+                    }
+
+                }else{
+                    is_touch = false;
+                    st_points = {};
+                }
+            });
+            function getDistance(p1,p2){
+                var x = p2.pageX - p1.pageX,
+                    y = p2.pageY - p1.pageY;
+                return Math.sqrt((x * x) + (y * y));
+            }
+        });
+    </script>
+
+</body>
+</html>
