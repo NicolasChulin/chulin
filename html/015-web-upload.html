@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web-upload</title>
+    <script src="../lib/js/jquery.min.js"></script>
+    <script src="../js/webuploader.js"></script>
+</head>
+<body>
+    <div id="uinfos-avatar">dianwo</div>
+
+
+
+    <script>
+        var ROOT_CONFIG = {
+            domain:'192.168.244.128:8000'
+        }
+        function upload_avatar(pickId,callback){
+            var uploader = WebUploader.create({
+                server: ROOT_CONFIG.domain+'/api/v1/poster/upload',
+                pick: '#'+pickId,
+                resize: false,
+                auto:true,
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/*'
+                },
+                threads: 1,
+                fileNumLimit: 1,
+                fileSingleSizeLimit: 1 * 1024 * 1024,
+            });
+            var showError = function(msg){
+                if(!msg){msg='上传失败，请稍后再试！';}
+                $('.uinfos-avatar-error').remove();
+                $('#'+pickId).after($('<div class="uinfos-avatar-error">'+msg+'<div>'));
+            }
+            uploader.on('fileQueued',function(file){
+
+            });
+            uploader.on('uploadBeforeSend', function(object, data, headers) {
+                headers.Authorization = 'JWT ' + storage.get('token');
+            });
+            uploader.on( 'uploadProgress', function(file,percentage ) {
+                $percent = $('#'+pickId).next('.uinfos-avatar-loading');
+                if (!$percent.length) {
+                    $percent = $('<div class="uinfos-avatar-loading"><span></span></div>');
+                    $('#'+pickId).after($percent);
+                }
+                $percent.css('width',percentage * 100 + '%' );
+            });
+            uploader.on('uploadSuccess',function(file,response) {
+                callback(response);
+            });
+            uploader.on('uploadError',function(file) {
+                showError(false);
+            });
+            uploader.on('uploadComplete',function(file){
+                $('#'+pickId).next('.uinfos-avatar-loading').remove();
+            });
+            uploader.on('error',function(code){
+                var text = '';
+                switch(code){
+                    case 'F_DUPLICATE':
+                        text = '该文件已经被选择了!';
+                        break;
+                    case 'Q_EXCEED_NUM_LIMIT':
+                        text = '上传文件数量超过限制!';
+                        break;
+                    case 'F_EXCEED_SIZE':
+                        text = '文件大小超过限制!';
+                        break;
+                    case 'Q_EXCEED_SIZE_LIMIT':
+                        text = '所有文件总大小超过限制!';
+                        break;
+                    case 'Q_TYPE_DENIED':
+                        text = '文件类型不正确或者是空文件!';
+                        break;
+                    default:
+                        text = '未知错误!';
+                        break;
+                }
+                showError(text);
+            });
+        }
+//        upload_avatar('uinfos-avatar',function(data){
+//            var link = ROOT_CONFIG.domain+"/api/v1/poster/image-uri?image=" + data.file;
+//            $.get(link).done(function(data){
+//                $scope.uinfos.avatar = data.images;
+//                storage.set('uinfos.person.avatar',data.image);
+//            });
+//        });
+
+
+
+    </script>
+</body>
+</html>

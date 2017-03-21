@@ -34,11 +34,11 @@
 
     <script>
         $(function(){
+            /* 双指缩放 */
             var is_touch=false,st_points={},width;
-            $(document).on('touchstart touchmove touchend',function($event){
+            $('body').on('touchstart touchmove touchend',function($event){
                 $event.stopPropagation();
                 $event.preventDefault();
-//                console.log($event);
                 if($event.type == 'touchstart'){
                     if($event.originalEvent.touches.length>=2){
                         is_touch = true;
@@ -51,7 +51,6 @@
                         var scale = getDistance(now_points[0],now_points[1])/getDistance(st_points[0],st_points[1]);
                         var leng = width*scale;
                         $('.container').css({'width':leng+'px','height':leng+'px'});
-//                        $('body').append($('<p>'+leng+'</p>'));
                     }
 
                 }else{
@@ -64,6 +63,34 @@
                     y = p2.pageY - p1.pageY;
                 return Math.sqrt((x * x) + (y * y));
             }
+
+            /* 单指移动 */
+            var bx, by, _bx, _by, eleft, etop,move=false;
+            $('.container').on('touchstart touchmove touchend',function(event){
+                event.preventDefault();
+                var ths = $(this);
+                var e = event.originalEvent.targetTouches[0];
+                if (event.type == "touchstart"){
+                    if(event.originalEvent.touches.length==1){
+                        move = true;
+                        _bx = e.pageX;
+                        _by = e.pageY;
+                        eleft = parseFloat(ths.css('left'));
+                        etop = parseFloat(ths.css('top'));
+                    }
+                } else if (event.type == "touchmove") {
+
+                    if(event.originalEvent.touches.length==1 && move){
+                        bx = e.pageX;
+                        by = e.pageY;
+                        var sx = bx - _bx + eleft;
+                        var sy = by - _by + etop;
+                        ths.css({'left': sx + 'px', 'top': sy + 'px'});
+                    }
+                }else{
+                    move = false;
+                }
+            });
         });
     </script>
 
