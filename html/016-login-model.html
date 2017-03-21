@@ -56,6 +56,68 @@
                 if($('#login-model').length==0){
                     var htm = $('#loginModel').html();
                     $('body').append($(htm));
+
+                    $('#loginModelForm').validate({
+                        rules:{
+                            username:{
+                                required:true,
+                                isPhoneOrEmail:true
+                            },
+                            password: {
+                                required: true,
+                                rangelength:[6,30]
+                            }
+                        },
+                        errorPlacement: function(error, element) {
+                            error.appendTo(element.parent().next());
+                        },
+                        submitHandler:function(form){
+                            $('#loginSubmit').attr('disabled','disabled').val('登录...');
+                            // alert("submitted");
+                            var datas = {
+                                'username':$('#username').val(),
+                                'password':$('#password').val()
+                            };
+                            $.ajax({
+                                url:'/api/v1/account/login',
+                                type:'post',
+                                data:datas,
+                                success:function(data){
+                                    var token = data.token;
+                                    $.ajaxSetup({
+                                        headers:{
+                                            Authorization:'JWT ' + token
+                                        }
+                                    });
+                                    $.ajax({
+                                        url:'/api/v1/account/profile',
+                                        success:function(data){
+                                            storage.set({
+                                                'uinfos':data,
+                                                'token':token,
+                                                'pswd_complex':password_complex($('#password').val())
+                                            });
+                                            var nextUrl = getNextUrl()
+                                            if(nextUrl){
+                                                document.location.href = nextUrl;
+                                            }else{
+                                                document.location.href = '/pc/account';
+                                            }
+                                        }
+                                    });
+
+                                    $('#loginSubmit').removeAttr('disabled').val('登录');
+                                },
+                                error:function(xhr){
+                                    $('#lmm-form-error-msg').text(xhr.responseJSON.detail || '请求错误，请稍后再试!');
+                                    $('#loginSubmit').removeAttr('disabled').val('登录');
+                                }
+                            });
+                            return false;
+                        }
+
+                    });
+
                 }
                 $('#login-model').fadeIn();
             });
@@ -63,66 +125,7 @@
                 $('#login-model').fadeOut();
             });
 
-            $('#loginModelForm').validate({
-                rules:{
-                    username:{
-                        required:true,
-                        isPhoneOrEmail:true
-                    },
-                    password: {
-                        required: true,
-                        rangelength:[6,30]
-                    }
-                },
-                errorPlacement: function(error, element) {
-                    error.appendTo(element.parent().next());
-                },
-                submitHandler:function(form){
-                    $('#loginSubmit').attr('disabled','disabled').val('登录...');
-                    // alert("submitted");
-                    var datas = {
-                        'username':$('#username').val(),
-                        'password':$('#password').val()
-                    };
-                    $.ajax({
-                        url:'/api/v1/account/login',
-                        type:'post',
-                        data:datas,
-                        success:function(data){
-                            var token = data.token;
-                            $.ajaxSetup({
-                                headers:{
-                                    Authorization:'JWT ' + token
-                                }
-                            });
-                            $.ajax({
-                                url:'/api/v1/account/profile',
-                                success:function(data){
-                                    storage.set({
-                                        'uinfos':data,
-                                        'token':token,
-                                        'pswd_complex':password_complex($('#password').val())
-                                    });
-                                    var nextUrl = getNextUrl()
-                                    if(nextUrl){
-                                        document.location.href = nextUrl;
-                                    }else{
-                                        document.location.href = '/pc/account';
-                                    }
-                                }
-                            });
 
-                            $('#loginSubmit').removeAttr('disabled').val('登录');
-                        },
-                        error:function(xhr){
-                            $('#lmm-form-error-msg').text(xhr.responseJSON.detail || '请求错误，请稍后再试!');
-                            $('#loginSubmit').removeAttr('disabled').val('登录');
-                        }
-                    });
-                    return false;
-                }
-
-            });
         });
     </script>
 </body>
