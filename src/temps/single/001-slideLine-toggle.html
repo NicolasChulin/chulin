@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slideline range and toggle</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/js/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+<body>
+<style>
+    .container{
+        background: #373737;
+        padding: 150px 15px;
+    }
+    .slideline{
+        height: 6px;
+        width: 300px;
+        background: #626262;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    .bar{
+        width: 20px;
+        height: 20px;
+        background: #dddddd;
+        border: 2px solid #a7a7a7;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        position: absolute;
+        top:-7px;
+        left: 0px;
+    }
+    .toggle{
+        width: 100px;
+        height: 40px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    .tog-line{
+        position: relative;
+        left: -60px;
+        top: 0;
+        height: 40px;
+        width: 200px;
+        background: #4b4b4b;
+    }
+    .line-left{
+        width: 80px;
+        height: 100%;
+        float: left;
+        background: #00e8d4;
+    }
+    .tog-btn{
+        float: left;
+        width: 40px;
+        height: 40px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        background: #000000;
+        margin-left: -20px;
+    }
+    .textarea{
+        padding: 15px;
+    }
+    #text{
+        font-family: 'Arial Black';
+        color: rgb(29, 47, 255);
+        text-shadow: rgb(253, 185, 51) 1.8px 1.8px 5px;
+        font-size: 30px;
+    }
+</style>
+    <div class="container">
+        <div class="slideline">
+            <div class="bar"></div>
+        </div>
+        <div class="rate">0</div>
+        <!--<input type="range" name="volume" min="0" max="100" value="16" onchange="console.log(this.value)">-->
+    </div>
+    <div class="container">
+        <div class="toggle">
+            <div class="tog-line">
+                <div class="line-left"></div>
+                <div class="tog-btn"></div>
+            </div>
+        </div>  
+    </div>
+
+
+<script>
+    $(function(){
+
+        $('.toggle').on('click',function(){
+            var tgo = $(this).children('.tog-line');
+            var left = parseInt(tgo.css('left'));
+            if(left == -60){
+                tgo.animate({left:'0px'},100);
+            }else{
+                tgo.animate({left:'-60px'},100);
+            }
+        });
+
+        var _x, x,move=false,barx;
+        var max = parseInt($('.slideline').width()-$('.bar').width());
+        $('.bar').on({
+            vmousedown:function(e){
+                move=true;
+                _x = e.pageX;//鼠标点击的位置
+                barx=parseInt($('.bar').css('left'));
+                console.log(barx);
+            },
+            vmousemove:function(e){
+                if(move){
+                    x= e.pageX;//鼠标移动时的位置
+                    var s = x-_x+barx;
+                    s = (s>max)?max:s;
+                    s = (s<0)?0:s;
+                    $(this).css('left',s+'px');
+                    $('.rate').html(Math.round(s*100/max));
+                }
+            },
+            vmouseup:function(){
+                move=false;
+            }
+        });
+    });
+</script>
+</body>
+</html>

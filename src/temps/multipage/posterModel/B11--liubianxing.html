@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>liubianxing</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .yunye-template {
+            position: relative;
+            z-index: 20;
+            /* padding-bottom: 120%; */
+            width: 100%;
+            height: 504px;
+            transform-origin: top left;
+            -webkit-transform-origin: top left;
+            -moz-transform-origin: top left;
+            -o-transform-origin: top left;
+            -ms-transform-origin: top left;
+            transform: scale(1) !important;
+            -webkit-transform: scale(1) !important;
+            background-size: 100% 100% !important;
+        }
+
+        .yunye-template> .content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .yunye-template> .content> div {
+            overflow: hidden;
+        }
+
+        .yunye-template> .content .cnns {
+            background-color: rgba(0, 174, 149, 1);
+        }
+
+        .yunye-template .cnns2 {
+            background-color: rgba(28, 138, 127, 0.5);
+        }
+
+        .yunye-template .c255 {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .yunye-template .c0 {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .content-1 {
+            -webkit-clip-path: url(#content-1);
+            clip-path: url(#content-1);
+            position: absolute;
+            height: 36.5%;
+            width: 36.3%;
+            top: 5.25%;
+            left: 0px;
+        }
+        .content-2 {
+            -webkit-clip-path: url(#content-2);
+            clip-path: url(#content-2);
+            position: absolute;
+            height: 32.16%;
+            width: 31.8%;
+            right: 0;
+            top: 5.25%;
+        }
+        .content-3{
+             -webkit-clip-path: url(#content-3);
+            clip-path: url(#content-3);
+            position: absolute;
+            height: 32.5%;
+            width: 34.1%;
+            left: 0px;
+            top: 43.42%;
+        }
+        .content-4{
+             -webkit-clip-path: url(#content-4);
+            clip-path: url(#content-4);
+            position: absolute;
+            height: 32.1%;
+            width: 25.72%;
+            right: 0px;
+            top: 39.5%;
+        }
+        .content-5{
+             -webkit-clip-path: url(#content-5);
+            clip-path: url(#content-5);
+            position: absolute;
+            height: 40.26%;
+            width: 55.48%;
+            left: 25.72%;
+            top: 22.72%;
+        }
+    </style>
+</head>
+<body>
+        <div class="yunye-template">
+            <div class="content">
+
+                <div class="content-1 cnns"></div>
+                <div class="content-2 cnns"></div>
+                <div class="content-3 cnns"></div>
+                <div class="content-4 cnns"></div>
+                <div class="content-5 cnns"></div>
+
+                <!-- svg -->
+                <svg class="clip-svg" id="svg" preserveAspectRatio="none" viewBox="0 0 1 1">
+                    <defs>
+                        <clipPath id="content-1" clipPathUnits="objectBoundingBox">
+                            <path d="M0 0,L0.656 0,L1 .5,L0.656 1,0 1z" fill="pink"></path>
+                        </clipPath>
+                        <clipPath id="content-2" clipPathUnits="objectBoundingBox">
+                            <path d="M1 0,L0.36 0,L0 0.5,L0.36 1,1 1z" fill="black"></path>
+                        </clipPath>
+                        <clipPath id="content-3" clipPathUnits="objectBoundingBox">
+                            <path d="M0 0.03,L0.014 0,L0.669 0,L1 0.5,L0.669 1,L0.014 1,0 0.966z" fill="black"></path>
+                        </clipPath>
+                        <clipPath id="content-4" clipPathUnits="objectBoundingBox">
+                            <path d="M1 0,L0.43 0,L0 0.5,L0.43 1,1 1z" fill="black"></path>
+                        </clipPath>
+                        <clipPath id="content-5" clipPathUnits="objectBoundingBox">
+                            <path d="M0.253 0,L0.747 0,L1 0.5,L0.747 1,L0.253 1,L0 0.5,0.253 0z" fill="black"></path>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+
+
+</body>
+</html>

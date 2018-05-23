@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login-model</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!-- link-libs -->
+    <link rel="stylesheet" href="../plugin/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/login-model.css">
+    <!-- script-libs -->
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+    <script src="../lib/js/jquery.validate.min.js"></script>
+    <script src="../lib/js/messages_zh.js"></script>
+    <!-- user-script -->
+    <script type="text/html" id="loginModel">
+        <div class="login-model" id="login-model">
+            <div class="login-model-main">
+                <div class="lmm-close-btn" id="lmm-close-btn"><i class="fa fa-close"></i></div>
+                <div class="lmm-body">
+                    <div class="lmm-left"></div>
+                    <div class="lmm-right">
+                        <div class="lmm-title">登录model</div>
+                        <form class="lmm-form" id="loginModelForm">
+                            <div class="lmm-form-item">
+                                <div class="lmm-form-input lmm-form-username">
+                                    <input type="text" name="username" id="username" placeholder="请输入邮箱或手机号" required autofocus>
+                                </div>
+                                <div class="lmm-form-error"></div>
+                            </div>
+                            <div class="lmm-form-item">
+                                <div class="lmm-form-input lmm-form-password">
+                                    <input type="password" name="password" id="password" placeholder="请输入密码" required>
+                                </div>
+                                <div class="lmm-form-error"></div>
+                            </div>
+                            <div class="lmm-form-error-msg" id="lmm-form-error-msg"></div>
+                            <div class="lmm-form-submit">
+                                <input type="submit" name="loginSubmit" id="loginSubmit" value="登&nbsp;录">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</head>
+<body>
+
+    <div class="btn btn-danger" id="showModel">点我</div>
+
+    <script>
+        $(function(){
+            $('#showModel').on('click',function(){
+                if($('#login-model').length==0){
+                    var htm = $('#loginModel').html();
+                    $('body').append($(htm));
+
+                    $('#loginModelForm').validate({
+                        rules:{
+                            username:{
+                                required:true,
+                                isPhoneOrEmail:true
+                            },
+                            password: {
+                                required: true,
+                                rangelength:[6,30]
+                            }
+                        },
+                        errorPlacement: function(error, element) {
+                            error.appendTo(element.parent().next());
+                        },
+                        submitHandler:function(form){
+                            $('#loginSubmit').attr('disabled','disabled').val('登录...');
+                            // alert("submitted");
+                            var datas = {
+                                'username':$('#username').val(),
+                                'password':$('#password').val()
+                            };
+                            $.ajax({
+                                url:'/api/v1/account/login',
+                                type:'post',
+                                data:datas,
+                                success:function(data){
+                                    var token = data.token;
+                                    $.ajaxSetup({
+                                        headers:{
+                                            Authorization:'JWT ' + token
+                                        }
+                                    });
+                                    $.ajax({
+                                        url:'/api/v1/account/profile',
+                                        success:function(data){
+                                            storage.set({
+                                                'uinfos':data,
+                                                'token':token,
+                                                'pswd_complex':password_complex($('#password').val())
+                                            });
+                                            var nextUrl = getNextUrl()
+                                            if(nextUrl){
+                                                document.location.href = nextUrl;
+                                            }else{
+                                                document.location.href = '/pc/account';
+                                            }
+                                        }
+                                    });
+
+                                    $('#loginSubmit').removeAttr('disabled').val('登录');
+                                },
+                                error:function(xhr){
+                                    $('#lmm-form-error-msg').text(xhr.responseJSON.detail || '请求错误，请稍后再试!');
+                                    $('#loginSubmit').removeAttr('disabled').val('登录');
+                                }
+                            });
+                            return false;
+                        }
+
+                    });
+
+                }
+                $('#login-model').fadeIn();
+            });
+            $('body').on('click','#lmm-close-btn',function(){
+                $('#login-model').fadeOut();
+            });
+
+
+        });
+    </script>
+</body>
+</html>

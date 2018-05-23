@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<title>012-slide-show-items</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <link rel="stylesheet" href="../plugin/fontawesome/css/font-awesome.min.css">
+</head>
+<body ng-controller="AppController">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing:border-box;
+        }
+        ul{
+            list-style-type: none;
+        }
+        img{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            position: absolute;
+            width:100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .main{
+            position: relative;
+            width:100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            color: #333;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+        .slide-box{
+            position: absolute;
+            height: 90px;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            margin-top: -45px;
+        }
+        .slide-box-items{
+            width: 33.33%;
+            height: 90px;
+            float:left;
+            position: relative;
+            top: 0;
+        }
+        .slide-names ul{
+            width: 70px;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            border: 1px solid #e1e1e1;
+            text-align: center;
+            background: #fff;
+            font-size: 14px;
+        }
+        .slide-names li{
+            height: 30px;
+            line-height: 30px;
+            font-weight: 600;
+        }
+        .slide-names li:first-child:before{
+            content: '';
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 9;
+            background-color: rgba(255,255,255,0.7);
+        }
+        .slide-names li:last-child:after{
+            content: '';
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 9;
+            background-color: rgba(255,255,255,0.7);
+        }
+        .slide-button{
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            box-shadow: 0 0 5px #999;
+            background: #fff;
+            top: 50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -20px;
+            text-align: center;
+        }
+
+        .slide-images ul{
+            height: 90px;
+            overflow: hidden;
+        }
+        .slide-images li{
+            width: 65px;
+            height: 90px;
+        }
+
+    </style>
+
+    <div class="main">
+        <div class="slide-box">
+            <div class="slide-box-items slide-names">
+                <ul>
+                    <li ng-repeat="c in currentNameList">{{c}}</li>
+                </ul>
+            </div>
+            <div class="slide-box-items slide-btn">
+                <div class="slide-button">点我<br>一下</div>
+            </div>
+            <div class="slide-box-items slide-images">
+                <ul>
+                    <li><img ng-src="{{'../images/sgs_avatars/'+currentAvatar+'.png'}}" alt="image"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module('app',[]);
+        app.controller('AppController',function($scope,$interval,$timeout){
+            var randomName = function() {
+                var nameList = ['姜维','李典','李儒','李严','廖化','凌统','刘备','刘表','刘禅','刘封','刘湛','鲁肃','陆逊','吕布','吕蒙','马超','马谡','满宠','孟获','庞德'];
+                var lists = [];
+                for (var i = 0; i < 8; i++){
+                    do{
+                        var name = nameList[Math.floor(Math.random() * nameList.length)];
+                    }while(lists.indexOf(name)>-1)
+                    lists.push(name);
+                }
+                console.log(lists);
+                return lists;
+            }
+            $scope.nameList = randomName();
+            $scope.currentNameList = $scope.nameList.slice(0,3);
+            $scope.currentIndex = 1;
+            $scope.currentAvatar = $scope.currentNameList[1];
+
+            var getCurNameList = function(index){
+                if(index == $scope.nameList.length-1){
+                    lists = [$scope.nameList[index-1],$scope.nameList[index],$scope.nameList[0]]
+                }else if(index == 0){
+                    lists = [$scope.nameList[$scope.nameList.length-1],$scope.nameList[index],$scope.nameList[index+1]]
+                }else{
+                    lists = [$scope.nameList[index-1],$scope.nameList[index],$scope.nameList[index+1]]
+                }
+                return lists;
+            }
+
+            var setName = function(){
+                if($scope.currentIndex == $scope.nameList.length-1){
+                    $scope.currentIndex = 0;
+                }else{
+                    $scope.currentIndex++;
+                }
+                $scope.currentNameList = getCurNameList($scope.currentIndex);
+                $scope.currentAvatar = $scope.currentNameList[1];
+            }
+            var clickme = function(){
+                var interp = $interval(function(){
+                    setName();
+                },100,20);
+                interp.then(function(){
+                    $interval.cancel(interp);
+                });
+            }
+            clickme();
+
+
+        });
+    </script>
+
+</body>
+</html>

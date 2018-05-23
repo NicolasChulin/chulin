@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>img-show</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugin/fontawesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+</head>
+<body>
+<style>
+    body{
+        background-color: #f0f0f0;
+    }
+    img{
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .container{
+        padding: 15px;
+    }
+    .main-btn{
+        padding: 10px 0;
+    }
+    .imglist{
+        overflow: hidden;
+    }
+    .img-li{
+        width:25%;
+        padding: 10px;
+        margin: 5px 0;
+        float: left;
+    }
+    .img-li img{
+        -webkit-box-shadow:  0px 0px 10px #373737;
+        -moz-box-shadow:  0px 0px 10px #373737;
+        box-shadow:  0px 0px 10px #373737;
+    }
+
+    .body-back{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: 98;
+        background:rgba(255,255,255,0.9);
+        display: none;
+    }
+    .img-detail{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: 99;
+        color:#5e5e5e;
+        display: none;
+    }
+    .img-detail .img-show{
+        background: #ffffff;
+        width: 828px;
+        height: 70%;
+        left: 50%;
+        top: 15%;
+        margin-left: -414px;
+        position: absolute;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow:  0px 0px 10px #373737;
+        -moz-box-shadow:  0px 0px 10px #373737;
+        box-shadow:  0px 0px 10px #373737;
+    }
+    .img-main{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    .img-close{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        right: -50px;
+        top: 0px;
+    }
+    .img-close .fa{
+        display:block;
+        font-size: 35px;
+        text-align: center;
+    }
+    .img-side{
+        position: absolute;
+        top: 50%;
+        width: 50px;
+        height: 50px;
+        margin-top: -25px;
+        cursor: pointer;
+    }
+    .img-side .fa{
+        display: block;
+        font-size: 50px;
+        text-align: center;
+    }
+    .img-left{
+        left: -50px;
+    }
+    .img-right{
+        right: -50px;
+    }
+    .imgs-li{
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+</style>
+    <div class="container">
+        <div class="body-main">
+            <div class="main-btn">
+                <div class="btn btn-default">click</div>
+            </div>
+            <div class="imglist">
+                <div class="img-li"><img src="../images/eventree.jpg" alt="img"></div>
+                <div class="img-li"><img src="../images/eventree.jpg" alt="img"></div>
+                <div class="img-li"><img src="../images/eventree.jpg" alt="img"></div>
+                <div class="img-li"><img src="../images/eventree.jpg" alt="img"></div>
+                <div class="img-li"><img src="../images/eventree.jpg" alt="img"></div>
+                <div class="img-li"><img src="../images/eventree.jpg" alt="img"></div>
+                <div class="img-li"><img src="../images/eventree.jpg" alt="img"></div>
+            </div>
+        </div>
+    </div>
+    <div class="body-back"></div>
+    <div class="img-detail">
+        <div class="img-show">
+            <div class="img-main"></div>
+            <div class="img-close"><i class="fa fa-close"></i></div>
+            <div class="img-side img-left"><i class="fa fa-angle-left"></i></div>
+            <div class="img-side img-right"><i class="fa fa-angle-right"></i></div>
+        </div>
+    </div>
+<script>
+    $(function(){
+        var mw = $('.img-show').width();
+        var imgArr = [
+            '../images/pcimgs/001.jpg',
+            '../images/pcimgs/002.jpg',
+            '../images/pcimgs/003.jpg',
+            '../images/pcimgs/004.jpg',
+            '../images/pcimgs/005.jpg',
+            '../images/pcimgs/006.jpg'
+        ];
+        var imgh = '';
+        for(var i=0;i<imgArr.length;i++){
+            imgh += '<div class="imgs-li" id="imgs'+i+'"><img src="'+imgArr[i]+'" alt="img"></div>';
+        }
+        $('.img-main').append(imgh).attr('data-nid',0);
+        $('.img-main').children('.imgs-li').first().css('opacity',1);
+
+        $('.img-left').on('click',function(){
+            var length = imgArr.length;
+            var nid = parseInt($('.img-main').attr('data-nid'));
+            var previd= nid-1;
+            if(previd>=0){
+                $('#imgs'+previd).css('left',-mw+'px');
+                $('#imgs'+nid).animate({'left':mw+'px','opacity':0},300);
+                $('#imgs'+previd).animate({'left':'0px','opacity':1},300);
+            }else{
+                previd = length-1;
+                $('#imgs'+previd).css('left',-mw+'px');
+                $('#imgs'+nid).animate({'left':mw+'px','opacity':0},300);
+                $('#imgs'+previd).animate({'left':'0px','opacity':1},300);
+            }
+            $('.img-main').attr('data-nid',previd);
+        });
+        $('.img-right').on('click',function(){
+            var length = imgArr.length;
+            var nid = parseInt($('.img-main').attr('data-nid'));
+            var nextid= nid+1;
+            if(nextid<=length-1){
+                $('#imgs'+nextid).css('left',mw+'px');
+                $('#imgs'+nid).animate({'left':-mw+'px','opacity':0},300);
+                $('#imgs'+nextid).animate({'left':'0px','opacity':1},300);
+            }else{
+                nextid = 0;
+                $('#imgs'+nextid).css('left',mw+'px');
+                $('#imgs'+nid).animate({'left':-mw+'px','opacity':0},300);
+                $('#imgs'+nextid).animate({'left':'0px','opacity':1},300);
+            }
+            $('.img-main').attr('data-nid',nextid);
+        });
+        $('.img-li').on('click',function(){
+            viewImgPage('open');
+        });
+        $('.img-close').on('click',function(){
+            viewImgPage('close');
+        });
+
+        function viewImgPage(type){
+            if(type == 'open'){
+                $('.body-back').fadeIn(100);
+                $('.img-detail').fadeIn(100);
+            }else{
+                $('.body-back').fadeOut(100);
+                $('.img-detail').fadeOut(100);
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tips-alert</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/js/jquery.js"></script>
+
+</head>
+<body>
+    <style>
+        body{
+            background: #793130;
+        }
+        .container{
+            padding: 50px;
+            position: relative;
+            height: 600px;
+        }
+        .btns{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        #clLoadTips{
+            position:fixed;
+            top:30%;
+            left: 50%;
+            padding: 10px 15px;
+            font-size: 16px;
+            height: 60px;
+            line-height: 40px;
+            text-align: center;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+
+    </style>
+    <div class="container">
+        <div class="btns form-inline">
+            <input type="text" class="btn btn-success" value="show" id="showTips">
+        </div>
+    </div>
+    <script>
+        ;(function($,window,document,undefined){
+            $.extend({
+                'tips':function(options){
+                    var deft = {
+                        message:'正在加载中',
+                        time:2000,
+                        style:{
+                            backColor:'rgba(0,0,0,.6)',
+                            color:'#fff'
+                        }
+                    }
+                    var opt = $.extend(true,{},deft,options);
+//                    console.log(opt);
+                    if($('#clLoadTips').length>0){
+                        $('#clLoadTips').html(opt.message).css({
+                            'background-color':opt.style.backColor,
+                            'color':opt.style.color
+                        });
+                    }else{
+                        var html = '<div id="clLoadTips" style="background-color:'+opt.style.backColor+';color:'+opt.style.color+';">'+opt.message+'</div>';
+                        $('body').append($(html));
+                    }
+                    $('#clLoadTips').fadeIn();
+                    setTimeout(function(){
+                        $('#clLoadTips').fadeOut();
+                    },opt.time);
+                }
+            });
+
+        })(jQuery,window,document);
+
+        $(function(){
+            $('#showTips').on('click',function(){
+                $.tips({
+                    message:'zheshiyigeceshi liszi',
+                    time:1000
+                });
+            });
+        })
+    </script>
+
+
+</body>
+</html>

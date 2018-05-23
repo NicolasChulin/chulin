@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+	<title>ng-derective</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+	<div class="container" ng-controller="NewDireController">
+		<change-dom type="one"></change-dom>
+		<br>
+		<br>
+		<change-dom type="two"></change-dom>
+		<div class="change-dom" type="one"></div>
+	</div>
+
+	<script>
+		var app = angular.module('app',[]);
+		app.controller('NewDireController',function($scope){
+			$scope.tim = '2016-11-13';
+			$scope.dirname = 'change-dom';
+		});
+		app.directive('changeDom',function(){
+			
+			return {
+				'restrict':'EC',
+				'replace':false,
+				'compile':function($element,$attrs){
+					if($attrs.type == 'one'){
+						$element.append('<div class="one" >one--{{tim}}</div>');
+					}else{
+						$element.append('<div class="two">two--{{tim}}</div>');
+					}
+
+					return function($scope,$element,$attrs){
+
+					}
+				}
+			}
+		});
+		app.directive('one',function(){
+			return {
+				'restrict':'EC',
+				'replace':false,
+				'template':'<span>haha</span>',
+				'link':function($scop,$el,$attr){
+
+				}
+			}
+		});
+	</script>
+
+</body>
+</html>

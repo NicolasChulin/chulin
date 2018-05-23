@@ -1,0 +1,17 @@
+{
+  "name": "sml-project-cl",
+  "version": "1.0.0",
+  "description": "sml-project-cl",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "chulinice@sina.com",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.2.1"
+  }
+}

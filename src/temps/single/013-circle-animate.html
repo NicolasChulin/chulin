@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>circle-animate</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="../css/common.css">
+    <script type="text/javascript" src="../lib/js/jquery.js"></script>
+
+</head>
+<body>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left:0;
+            top: 0;
+        }
+        .container{
+            width: 210px;
+            height:280px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform:translate(-50%,-50%);
+        }
+        .container li{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin: 10px;
+            -webkit-box-shadow:  0 0 1px #808080;
+            -moz-box-shadow:  0 0 1px #808080;
+            box-shadow:  0 0 1px #808080;
+            position: absolute;
+        }
+        .container li:nth-child(1){
+            left: 0;
+            top: 0;
+        }
+        .container li:nth-child(2){
+            left: 70px;
+            top: 0;
+        }
+        .container li:nth-child(3){
+            right: 0;
+            top: 0;
+        }
+        .container li:nth-child(4){
+            right:0;
+            top: 70px;
+        }
+        .container li:nth-child(5){
+            right: 0;
+            bottom: 70px;
+        }
+        .container li:nth-child(6){
+            right: 0;
+            bottom: 0;
+        }
+        .container li:nth-child(7){
+            right: 70px;
+            bottom: 0;
+        }
+        .container li:nth-child(8){
+            left: 0;
+            bottom: 0;
+        }
+        .container li:nth-child(9){
+            left: 0;
+            bottom: 70px;
+        }
+        .container li:nth-child(10){
+            left: 0;
+            top: 70px;
+        }
+
+        .container li.act{
+            background: #ff3b30;
+            color: #fff;
+        }
+        #toggle{
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 35px;
+            line-height: 35px;
+            padding: 0 10px;
+            -webkit-box-shadow:  0 0 1px #606060;
+            -moz-box-shadow:  0 0 1px #606060;
+            box-shadow:  0 0 1px #606060;
+            cursor: pointer;
+        }
+        #toggle:hover{
+            background: #f0f0f0;
+        }
+        #toggle.act{
+            background: #d0d0d0;
+        }
+    </style>
+
+    <div class="container">
+        <ul>
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+        </ul>
+        <div id="toggle" data-type="start">开始/停止</div>
+    </div>
+    <script>
+        $(function(){
+            var getNumList = function(firstNum){
+                if(firstNum==0){
+                    return [7,8,9,0];
+                }
+                if(firstNum==1){
+                    return [8,9,0,1];
+                }
+                if(firstNum==2){
+                    return [9,0,1,2];
+                }
+                return [firstNum-3,firstNum-2,firstNum-1,firstNum];
+            }
+            var bg = true;
+            var nowItem = 0;
+            var t;
+            var animate = function(){
+                t = setTimeout(function(){
+                    $('.container li').removeClass('act');
+                    if(bg){
+                        if(nowItem<3){
+                            for(var i=0;i<=nowItem;i++){
+                                $('.container li').eq(i).addClass('act');
+                            }
+                        }
+                        if(nowItem==2){bg=false;}
+                    }else{
+                        var items = getNumList(nowItem);
+                        for(var i=0;i<items.length;i++){
+                            $('.container li').eq(items[i]).addClass('act');
+                        }
+                    }
+                    nowItem++;
+                    if(nowItem>9){nowItem=0;}
+                    animate();
+                },100);
+            }
+
+            $('#toggle').on('click',function(){
+                var tp = $(this).toggleClass('act').attr('data-type');
+                if(tp=='open'){
+                    $(this).attr('data-type','stop');
+                    clearTimeout(t);
+                }else{
+                    $(this).attr('data-type','open');
+                    animate();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

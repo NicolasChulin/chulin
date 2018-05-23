@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>theames</title>
+</head>
+<body>
+  <style media="screen">
+    p{
+      margin: 0;
+    }
+    .item-topic{
+      background: #e0e0e0;
+    }
+    .item-option{
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 20px;
+      margin: 8px auto;
+    }
+    .item-option-4{
+      width: 100%;
+    }
+    .item-option-2{
+      width: 50%;
+    }
+    .item-option-1{
+      width: 25%;
+    }
+
+    .page-box{
+      width: 1000px;
+      height: 800px;
+      border: 1px solid #e0e0e0;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    #content{
+      visibility: hidden;
+    }
+  </style>
+
+  <div id="content"></div>
+
+  <div class="page-box">
+    <div class="page-content" id="page-content"></div>
+  </div>
+
+  <script type="text/javascript">
+    window.onload = function () {
+      var contDom = document.getElementById('content');
+      var pageContDom = document.getElementById('page-content');
+      var pageContIndex = 0;
+      // 0 试题 1 选项
+      var datas = [
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+        {
+          type: 0,
+          content: '这是一个很长的荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣这和拿大龙圣诞节联发科啊撒旦解放啦时间打啊看见电视里法律手段啊手动阀加拉斯记得发拉萨酱豆腐了'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，zhend额啊打发'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，很长的呢荣'
+        },
+        {
+          type: 1,
+          content: '这是一个选项，i所属拉拉法尔'
+        },
+
+      ]
+      var optionWs = []
+      datas.forEach(function (item, index) {
+        var dom = createDom(item, index)
+        if (item.type) {
+          contDom.appendChild(dom)
+          optionWs.push({
+            dom: dom,
+            w: dom.clientWidth
+          })
+        } else {
+          appendPageBox(dom)
+        }
+
+        if (optionWs.length === 4) {
+          var cls = getLineType(optionWs)
+          optionWs.forEach(function (item) {
+            contDom.removeChild(item.dom)
+          })
+          optionWs.forEach(function (item) {
+            item.dom.setAttribute('class', 'item-option ' + cls)
+            appendPageBox(item.dom)
+          })
+          optionWs = []
+        }
+      })
+
+      function appendPageBox (dom) {
+        pageContDom.appendChild(dom);
+        var pch = pageContDom.clientHeight;
+        if (pch > 800) {
+          pageContIndex++
+          pageContDom.removeChild(dom);
+          var pageBoxDom = document.createElement('div');
+          pageBoxDom.setAttribute('class', 'page-box');
+          pageContDom = document.createElement('div');
+          pageContDom.setAttribute('id', 'page-content' + pageContIndex);
+          pageContDom.setAttribute('class', 'page-content');
+          pageBoxDom.appendChild(pageContDom);
+          document.body.appendChild(pageBoxDom);
+
+          pageContDom.appendChild(dom);
+        }
+      }
+      function createDom (data, index) {
+        var t = document.createTextNode(data.content + '-' + index + '-')
+        var p = document.createElement('P')
+        var cls = data.type ? 'item-option' : 'item-topic'
+        p.setAttribute('class', cls)
+        p.setAttribute('data-index', index)
+        p.appendChild(t)
+        return p
+      }
+
+      function getLineType (optionWs) {
+        var type = 'item-option-1'
+        for (var i = 0; i < optionWs.length; i++) {
+          var rate = optionWs[i].w / 1015
+          if (rate > 0.5) {
+            type = 'item-option-4'
+            return type
+          }
+          if (rate > 0.25) type = 'item-option-2'
+        }
+        return type
+      }
+    }
+  </script>
+</body>
+</html>
