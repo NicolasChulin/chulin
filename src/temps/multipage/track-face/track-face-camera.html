@@ -6,9 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>track-face-camera</title>
   <script src="js/tracking-min.js"></script>
+  <script src="js/tracking-extend.js"></script>
   <script src="js/data/face-min.js"></script>
-  <!-- <script src="js/dat.gui.min.js"></script> -->
-  <!-- <script src="js/stats.min.js"></script> -->
   <style media="screen">
     .demo-frame{
       padding: 50px 0;
@@ -31,8 +30,8 @@
     }
     #shot{
       position: absolute;
-      width: 640px;
-      height: 480px;
+      width: 320px;
+      height: 240px;
       right: 0;
       top: 150px;
       border: 1px solid #e0e0e0;
@@ -43,78 +42,43 @@
 
   <div class="demo-frame">
     <div class="demo-container">
+      <!-- btn actions -->
       <button id="start">start face-camera</button>
+      <button id="stop">stop</button>
+      <button id="run">run</button>
 
-      <video id="video" width="640" height="480" preload autoplay loop muted></video>
-      <canvas id="canvas" width="640" height="480"></canvas>
-      <!-- <canvas id="shot" width="640" height="480"></canvas> -->
+      <!-- track element  -->
+      <video id="video" width="320" height="240" preload autoplay loop muted></video>
+      <canvas id="canvas" width="320" height="240"></canvas>
+
+      <!-- shot show element -->
       <img src="" alt="shot" id="shot">
     </div>
   </div>
 
   <script>
-
-    function TrackingFace (vedioId, canvasId) {
-      this.vedioId = vedioId;
-      this.canvasId = canvasId;
-      this.canvasDom = document.getElementById(canvasId);
-      this.tracker =  new tracking.ObjectTracker('face');
-      this.trackTask = null
-      this.morePeopleWarning = null
-      this.nonePeopleWarning = null
-    }
-    TrackingFace.prototype.catchView = function (noneCalback, warningCallback) {
-      this.tracker.setInitialScale(4);
-      this.tracker.setStepSize(2);
-      this.tracker.setEdgesDensity(0.1);
-      this.morePeopleWarning = warningCallback;
-      this.nonePeopleWarning = noneCalback;
-      this.trackTask = tracking.track('#' + this.vedioId, this.tracker, { camera: true });
-      this.bindEvent()
-    }
-
-    TrackingFace.prototype.bindEvent = function () {
-      var _this = this;
-      var canvas = _this.canvasDom;
-      var context = _this.canvasDom.getContext('2d');
-      var videoDom = document.getElementById(_this.vedioId)
-
-      _this.tracker.on('track', function (event) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (event.data.length > 1) {
-          context.drawImage(videoDom, 0, 0, canvas.width, canvas.height);
-          var shotImg = canvas.toDataURL('image/jpeg', 0.5);
-          // document.getElementById('shot').src = shotImg;
-          if (typeof _this.morePeopleWarning === 'function') _this.morePeopleWarning(shotImg)
-
-        } else if (event.data.length === 0) {
-
-          if (typeof _this.nonePeopleWarning === 'function') _this.nonePeopleWarning()
-        }
-
-        event.data.forEach(function (rect) {
-          context.strokeStyle = '#dd0a20';
-          context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-          context.font = '11px Helvetica';
-          context.fillStyle = "#dd0a20";
-          context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-          context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-        });
-      });
-    }
-
     window.onload = function () {
-      var tf = new TrackingFace('video', 'canvas');
+      var tf = new TrackingFace();
+      var moreWarningNum = 0;
       document.getElementById('start').addEventListener('click', function (e) {
-        tf.catchView(function () {
+        tf.catchView(function (screenShotImg) {
+          if (moreWarningNum < 5) {
+            document.getElementById('shot').src = screenShotImg;
+            moreWarningNum++;
+          }
           console.log('warning: more than one people');
         }, function () {
           console.log('error: none people');
         });
       });
-    }
 
+      document.getElementById('stop').addEventListener('click', function (e) {
+        tf.stopCatch();
+      });
+      document.getElementById('run').addEventListener('click', function (e) {
+        tf.runCatch();
+      });
+    }
 
   </script>
 
