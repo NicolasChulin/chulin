@@ -27,9 +27,10 @@
     var requestAnimationFrame_ = function() {
       requestId = window.requestAnimationFrame(function(timestamp) {
         if (element.readyState === element.HAVE_ENOUGH_DATA) {
-          try {
-            context.drawImage(element, 0, 0, width, height);
-          } catch (err) {}
+          // 目前展示注释掉，源代码在tracking.js line 252
+          // try {
+          //   context.drawImage(element, 0, 0, width, height);
+          // } catch (err) {}
 
           if (!start) start = timestamp;
           var during = timestamp - start;
