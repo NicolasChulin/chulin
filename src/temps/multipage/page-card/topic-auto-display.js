@@ -1,5 +1,5 @@
 /**
- * TopicAutoDisplay 试题自动话排布
+ * TopicAutoDisplay 试题自动化排布
  * @author  chulin
  * created 2018-05-24 14:00:00
  */
@@ -91,7 +91,7 @@
       return 'infos';
     },
     /**
-     * 创建当天试题内容dom
+     * 创建当条试题内容dom
      * @param  {[String]} contPixel [试题内容]
      * @return {[domObject]}
      */
