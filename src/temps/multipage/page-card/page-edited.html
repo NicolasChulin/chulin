@@ -6,121 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="renderer" content="webkit|ie-comp|ie-stand">
-  <title>page</title>
+  <title>page-edited</title>
   <link rel="stylesheet" href="/static/css/page.edited.css">
 </head>
-
 <body>
 
-
-  <div class="page-cont page-2-col">
-    <div class="cont-main">
-      <div class="cont-points"><span></span> <span></span> <span></span> <span></span> <span></span> <span></span></div>
-      <div class="cont-mf"><span>密封线</span></div>
-      <div class="cont-items">
-        <div class="cont-box cont-box-act">
-          <div id="element-select-100" class="element-item element-select" style="z-index: 122; width: 876px; height: 140px; left: 0px; top: 198px; padding: 0px; border-style: solid;">
-            <div>
-              <ul>
-                <li><i>1</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>2</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>3</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>4</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>5</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-              </ul>
-              <ul>
-                <li><i>6</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>7</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>8</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>9</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>10</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-              </ul>
-              <ul>
-                <li><i>11</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>12</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>13</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>14</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>15</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-              </ul>
-            </div>
-          </div>
-          <div id="element-fill-102" class="element-item element-fill element-item-act" style="z-index: 124; width: 876px; height: 165px; left: 0px; top: 409px; padding: 0px; border-style: solid;">
-            <div>
-              <ul class="noun-cols-5">
-                <li class="input-line"><span>(1)</span><span></span></li>
-                <li class="input-line"><span>(2)</span><span></span></li>
-                <li class="input-line"><span>(3)</span><span></span></li>
-                <li class="input-line"><span>(4)</span><span></span></li>
-                <li class="input-line"><span>(5)</span><span></span></li>
-                <li class="input-line"><span>(6)</span><span></span></li>
-                <li class="input-line"><span>(7)</span><span></span></li>
-                <li class="input-line"><span>(8)</span><span></span></li>
-                <li class="input-line"><span>(9)</span><span></span></li>
-                <li class="input-line"><span>(10)</span><span></span></li>
-                <li class="input-line"><span>(11)</span><span></span></li>
-                <li class="input-line"><span>(12)</span><span></span></li>
-                <li class="input-line"><span>(13)</span><span></span></li>
-                <li class="input-line"><span>(14)</span><span></span></li>
-                <li class="input-line"><span>(15)</span><span></span></li>
-                <li class="input-line"><span>(16)</span><span></span></li>
-                <li class="input-line"><span>(17)</span><span></span></li>
-                <li class="input-line"><span>(18)</span><span></span></li>
-                <li class="input-line"><span>(19)</span><span></span></li>
-                <li class="input-line"><span>(20)</span><span></span></li>
-              </ul>
-            </div>
-          </div>
-          <div id="element-noun-112" class="element-item element-noun" style="z-index: 115; width: 876px; height: 100px; left: 0px; top: 0px;">
-            <div>
-              <ul class="noun-cols-2">
-                <li class="input-line require-flex"><span>学号：</span><span><em>${student_code!}</em></span></li>
-                <li class="input-line require-flex"><span>准考证号：</span><span><em>${exam_number!}</em></span></li>
-              </ul>
-            </div>
-          </div>
+  <div class="page-list" id="page-list">
+    <div class="page-cont page-2-col">
+      <div class="cont-main">
+        <div class="cont-nouns">
+          <ul class="noun-cols-2">
+            <li class="input-line"><span>身份证号：</span><span><em></em></span></li>
+            <li class="input-line"><span>专业：</span><span><em></em></span></li>
+          </ul>
         </div>
-      </div>
-      <div class="cont-items">
-        <div class="cont-box">
-          <div id="element-write-102" class="element-item element-write" style="z-index: 112; width: 876px; height: 405px; left: 0px; top: 78px;">
-            <div>
-              <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
+        <div class="cont-mf cont-page-mf">
+          <div class="mf-cont"><span>线</span><span>封</span><span>密</span></div>
+        </div>
+        <div class="cont-items">
+          <div class="cont-box cont-box-act">
+            <div id="element-text-100" class="page-element-item element-item element-text element-item-act" style="z-index: 157; width: 875px; height: 100px; top: 0px; left: 0px; padding: 0px;">
+              <div>
+                <p style="font-size: 30px; line-height: 100px; text-align: center; font-weight: 600;">武汉大学城市学院考试</p>
+              </div>
             </div>
-          </div>
-          <div id="element-text-104" class="element-item element-text" style="z-index: 113; width: 400px; height: 32px; left: 239px; top: 0px;">
-            <div>
-              <p style="font-size: 16px; line-height: 30px; text-align: center; font-weight: 300;">jalsdlakdklajs</p>
+            <div id="element-noun-108" class="page-element-item element-item element-noun" style="z-index: 155; width: 875px; height: 132px; top: 0px; left: 0px; padding: 15px;">
+              <div>
+                <ul class="noun-cols-4">
+                  <li class="input-line require-flex"><span>准考证号：</span><span><em>${exam_number!}</em></span></li>
+                  <li class="input-line require-flex"><span>身份证号：</span><span><em>${student_id!}</em></span></li>
+                  <li class="input-line require-flex"><span>姓名：</span><span><em>${name!}</em></span></li>
+                  <li class="input-line require-flex"><span>专业：</span><span><em>${subject!}</em></span></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="page-cont page-next page-3-col page-hide">
-    <div class="cont-main">
-      <div class="cont-items">
-        <div class="cont-box"></div>
-      </div>
-      <div class="cont-items">
-        <div class="cont-box"></div>
-      </div>
-      <div class="cont-items">
-        <div class="cont-box"></div>
-      </div>
-    </div>
-  </div>
 
+  <script type="text/javascript" src="topic-auto-display.js"></script>
   <script type="text/javascript">
     window.onload = function() {
       var requireFlexDoms = document.querySelectorAll('.require-flex');
@@ -131,7 +57,29 @@
           var rate = (span.clientWidth / em.clientWidth).toFixed(2);
           em.style.transform = 'scale(' + rate + ',' + rate + ')';
         }
-      })
+      });
+
+      var dataList = [];
+      var nums = ['一', '二', '三'];
+      for (var m = 0; m < 3; m++) {
+        dataList = dataList.concat([
+          '<p class="pDetail"><b>'+ nums[m] +'、单选题（本大题共10小题，共20分）</b></p>',
+          '<p><b>在每小题列出的备选项中只有一个符合题目要求的，请将其选出并将“答题卡”的相应代码涂黑，错涂、多涂或未涂均无分。</b></p>'
+        ]);
+
+        for (var n = 1; n <= 60; n++) {
+          dataList = dataList.concat([
+            '<p class="pQues">'+ n +'.题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干？(2分)</p>',
+            '<p class="pOpt">A.测试</p>',
+            '<p class="pOpt">B.测试测试</p>',
+            '<p class="pOpt">C.测试测试测试测试测试测试sfgsdf </p>',
+            '<p class="pOpt">D.测试测试测试</p>',
+            '<p class="pOpt">E.测试测试测试测试测试测试测试测试测试</p>'
+          ]);
+        }
+      }
+      new TopicAutoDisplay({topocList: dataList});
+
     }
   </script>
 </body>
