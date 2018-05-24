@@ -9,6 +9,7 @@
   <title>page-edited</title>
   <link rel="stylesheet" href="/static/css/page.edited.css">
 </head>
+
 <body>
 
   <div class="page-list" id="page-list">
@@ -16,8 +17,8 @@
       <div class="cont-main">
         <div class="cont-nouns">
           <ul class="noun-cols-2">
-            <li class="input-line"><span>身份证号：</span><span><em></em></span></li>
-            <li class="input-line"><span>专业：</span><span><em></em></span></li>
+            <li class="input-line"><span>身份证号：</span><span><em>${student_id!}</em></span></li>
+            <li class="input-line"><span>专业：</span><span><em>${subject!}</em></span></li>
           </ul>
         </div>
         <div class="cont-mf cont-page-mf">
@@ -63,13 +64,13 @@
       var nums = ['一', '二', '三'];
       for (var m = 0; m < 3; m++) {
         dataList = dataList.concat([
-          '<p class="pDetail"><b>'+ nums[m] +'、单选题（本大题共10小题，共20分）</b></p>',
+          '<p class="pDetail"><b>' + nums[m] + '、单选题（本大题共10小题，共20分）</b></p>',
           '<p><b>在每小题列出的备选项中只有一个符合题目要求的，请将其选出并将“答题卡”的相应代码涂黑，错涂、多涂或未涂均无分。</b></p>'
         ]);
 
         for (var n = 1; n <= 10; n++) {
           dataList = dataList.concat([
-            '<p class="pQues">'+ n +'、题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干？(2分)</p>',
+            '<p class="pQues">' + n + '、题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干题干？(2分)</p>',
             '<p class="pOpt">A. 测试</p>',
             '<p class="pOpt">B. 测试测试</p>',
             '<p class="pOpt">C. 测试测试测试测试测试测试sfgsdf </p>',
@@ -78,7 +79,9 @@
           ]);
         }
       }
-      new TopicAutoDisplay({topocList: dataList});
+      new TopicAutoDisplay({
+        topocList: dataList
+      });
 
     }
   </script>
