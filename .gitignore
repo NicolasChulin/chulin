@@ -3,6 +3,7 @@
 node_modules/
 dist/
 src/static/css/
+src/static/jsmin/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

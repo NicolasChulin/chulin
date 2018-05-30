@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <title>page-card</title>
+</head>
+
+<style>
+a,blockquote,body,dd,div,dl,dt,footer,h1,h2,h3,h4,h5,h6,header,input,li,ol,p,span,td,th,tr,ul{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box}li{list-style:none}.input-line{height:40px;line-height:40px;font-size:18px}.input-line span:first-child{float:left;background-color:#fff}.input-line span:last-child{display:block;height:38px;border-bottom:1px solid #333;overflow:hidden;white-space:nowrap}.input-line em{font-style:normal;-webkit-transform-origin:0 50%;-ms-transform-origin:0 50%;transform-origin:0 50%;height:37px;line-height:37px;display:inline-block;vertical-align:middle}.page-cont{width:1973px;height:1380px;padding:70px 50px 70px 120px;font-size:15px;background:#fff}.cont-main{height:100%;position:relative}.cont-points span{display:block;width:40px;height:20px;background:#000;position:absolute}.cont-points span:nth-of-type(1){top:-40px;left:0}.cont-points span:nth-of-type(2){top:-40px;left:50%;margin-left:-22px}.cont-points span:nth-of-type(3){top:-40px;right:15px}.cont-points span:nth-of-type(4){bottom:-40px;left:0}.cont-points span:nth-of-type(5){bottom:-40px;left:50%;margin-left:-22px}.cont-points span:nth-of-type(6){bottom:-40px;right:15px}.cont-mf{float:left;height:100%;width:40px;margin-left:-40px;padding:590px 7px 0;text-align:center;border-right:2px solid #333}.cont-page-mf{border-right:0;padding:0;position:relative}.cont-page-mf:before{content:"";display:block;position:absolute;height:100%;width:1px;left:19px;top:0;z-index:8;border-left:2px dotted #333}.cont-page-mf .mf-cont{position:absolute;width:100%;height:100%;z-index:9;padding:280px 0}.cont-page-mf .mf-cont span{display:block;width:40px;height:40px;line-height:40px;background:#fff;-webkit-transform:rotate(-90deg);-ms-transform:rotate(-90deg);transform:rotate(-90deg)}.cont-page-mf .mf-cont span:nth-of-type(2){margin:280px 0}.cont-nouns{position:absolute;height:46px;width:1240px;top:-23px;left:-1305px;padding:0 20px;-webkit-transform:rotate(-90deg);-ms-transform:rotate(-90deg);transform:rotate(-90deg);-webkit-transform-origin:right;-ms-transform-origin:right;transform-origin:right;border:1px dashed transparent}.cont-nouns ul{overflow:hidden}.cont-nouns ul li{float:left;padding:0 10px;width:25%}.cont-nouns ul.noun-cols-5 li{width:20%}.cont-items{float:left;height:100%;padding:0 15px 0 10px}.page-2-col .cont-items{width:50%}.page-3-col .cont-items{width:33.33%}.cont-items .cont-box{border:1px solid transparent;font-size:0}.page-next .cont-items .cont-box{border:1px solid #333;height:100%}.element-item{position:absolute;width:400px;line-height:30px;border:1px dashed transparent;background:#fff}.element-item ul{overflow:hidden}.element-item ul.noun-cols-1 li{width:100%}.element-item ul.noun-cols-2 li{width:50%}.element-item ul.noun-cols-3 li{width:33.33%}.element-item ul.noun-cols-4 li{width:25%}.element-item ul.noun-cols-5 li{width:20%}.page-element-item{position:relative;width:100%}.element-noun li{float:left;padding:0 10px}.element-fill li{float:left;padding:0 10px}.element-select{font-size:0}.element-select ul{display:inline-block;vertical-align:bottom;margin-bottom:15px;width:25%}.element-select li{height:27px}.element-select li i{text-align:center;display:inline-block;vertical-align:middle;padding:0 7px;height:18px;line-height:16px;margin-right:7px;border:1px solid #333;font-size:12px;font-style:normal}.element-select li i:first-of-type{border:0;padding:0;width:25px}.element-write ul{padding:0 15px}.element-write li{height:40px;border-bottom:1px solid #333}@media print{.page-next,.page-to-next{page-break-before:always}@page{size:A3 landscape}.cont-points span{-webkit-print-color-adjust:exact;print-color-adjust:exact}}.item-option{display:inline-block;vertical-align:middle;line-height:24px;padding-right:10px;font-size:15px}.item-option-4{width:100%}.item-option-2{width:50%}.item-option-1{width:25%}.item-topic{font-size:15px;margin:15px 0 8px;line-height:24px}.item-category{font-size:16px;padding-top:50px}.cont-box p.item-category:first-of-type{padding:0}.cont-box p.item-topic:first-of-type{margin-top:0}.item-infos{font-size:16px;text-indent:30px}#ls-box{visibility:hidden}
+</style>
+
+<!-- 下面放页面内容 -->
+
+<!-- 上面放页面内容 -->
+
+<!-- 题卡用下面的js -->
+<script type="text/javascript">
+  window.onload = function() {
+    var requireFlexDoms = document.querySelectorAll('.require-flex');
+    requireFlexDoms.forEach(function(itemDom) {
+      var span = itemDom.childNodes[1];
+      var em = span.childNodes[0];
+      if (span.clientWidth < em.clientWidth) {
+        var rate = (span.clientWidth / em.clientWidth).toFixed(2);
+        em.style.transform = 'scale(' + rate + ',' + rate + ')';
+      }
+    })
+  }
+</script>
+
+<!-- 试卷用下面的js -->
+<script type="text/javascript">
+  !function(t,n,i){var o=function(t){void 0===t&&(t={}),this.pageContCls="page-cont",this.topicBoxCls="cont-main",this.topicPartCls="cont-items",this.topicPartContCls="cont-box",this.topicList=t.topicList,this.topicBoxDom=n.querySelectorAll("."+this.topicBoxCls)[0],this.topicPartContDom=this.topicBoxDom.querySelectorAll("."+this.topicPartContCls)[0],this.partH=this.topicBoxDom.clientHeight,this.partW=this.topicPartContDom.offsetWidth,this.optionWs=[],this.lsBoxCls="ls-box",this.initDom(),this.displayList()};function p(t){return n.getElementById(t)}o.prototype={initDom:function(){var t=n.createElement("div");t.setAttribute("class",this.lsBoxCls),t.setAttribute("id",this.lsBoxCls),n.body.appendChild(t)},displayList:function(){var e=this,n=p(e.lsBoxCls);e.topocList.forEach(function(t,i){var o=e.createPixelDom(t,i);"option"===e.getPixelType(t)?(n.appendChild(o),e.optionWs.push({dom:o,w:o.clientWidth})):(e.optionWs.length&&e.appendOptionPixel(),e.appendPixel(o))}),e.optionWs.length&&e.appendOptionPixel()},getPixelType:function(t){return-1<t.indexOf("pQues")?"topic":-1<t.indexOf("pOpt")?"option":-1<t.indexOf("pDetail")?"category":"infos"},createPixelDom:function(t){var i=this.getPixelType(t),o=n.createElement("P"),e="item-"+i;return o.setAttribute("class",e),o.innerHTML=t,o},appendPixel:function(t){(this.topicPartContDom.appendChild(t),this.topicPartContDom.offsetHeight>this.partH)&&(this.topicPartContDom.removeChild(t),2===this.topicBoxDom.querySelectorAll("."+this.topicPartContCls).length&&this.createNewTopicBox(),this.createNewTopicPartCont(),this.topicPartContDom.appendChild(t))},appendOptionPixel:function(){var i=this,o=i.getOptionType(),t=p(i.lsBoxCls);i.optionWs.forEach(function(t){t.dom.setAttribute("class","item-option "+o),i.appendPixel(t.dom)}),t.innerHTML="",i.optionWs=[]},getOptionType:function(){for(var t="item-option-1",i=0;i<this.optionWs.length;i++){var o=this.optionWs[i].w/this.partW;if(.5<o)return t="item-option-4";.25<o&&(t="item-option-2")}return t},createNewTopicBox:function(){var t=n.createElement("div");t.setAttribute("class",this.pageContCls+" page-2-col page-to-next"),topicBox=n.createElement("div"),topicBox.setAttribute("class",this.topicBoxCls),t.appendChild(topicBox),p("page-list").appendChild(t),this.topicBoxDom=topicBox},createNewTopicPartCont:function(){var t=n.createElement("div");t.setAttribute("class",this.topicPartCls),topicPartCont=n.createElement("div"),topicPartCont.setAttribute("class",this.topicPartContCls),t.appendChild(topicPartCont),this.topicBoxDom.appendChild(t),this.topicPartContDom=topicPartCont}},"undefined"!=typeof module&&module.exports&&(module.exports=o),"function"==typeof define&&define(function(){return o}),t.TopicAutoDisplay=o}(window,document);
+
+  window.onload = function() {
+    var requireFlexDoms = document.querySelectorAll('.require-flex');
+    requireFlexDoms.forEach(function(itemDom) {
+      var span = itemDom.childNodes[1];
+      var em = span.childNodes[0];
+      if (span.clientWidth < em.clientWidth) {
+        var rate = (span.clientWidth / em.clientWidth).toFixed(2);
+        em.style.transform = 'scale(' + rate + ',' + rate + ')';
+      }
+    });
+
+    dataList = [] /* dataList为试题信息数组 */
+    new TopicAutoDisplay({
+      topicList: dataList
+    });
+  }
+</script>
+
+</body>
+
+</html>

@@ -11,7 +11,7 @@
     this.topicBoxCls = 'cont-main'; // 试卷页面内容盒子class名
     this.topicPartCls = 'cont-items'; // 试卷单列盒子class名
     this.topicPartContCls = 'cont-box'; // 试卷单列内容盒子class名
-    this.topocList = opt.topocList; // 需要展示的题目数据
+    this.topicList = opt.topicList; // 需要展示的题目数据
 
     // 当前试卷页面内容盒子
     this.topicBoxDom = document.querySelectorAll('.' + this.topicBoxCls)[0];
@@ -141,7 +141,7 @@
      * 检查试题选项展示类型
      * @return {[String]}
      */
-    getOptionType () {
+    getOptionType: function () {
       var type = 'item-option-1';
       for (var i = 0; i < this.optionWs.length; i++) {
         var rate = this.optionWs[i].w / this.partW;
