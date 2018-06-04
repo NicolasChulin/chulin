@@ -49,7 +49,7 @@
       var self = this;
       var lsDom = $id(self.lsBoxCls);
 
-      self.topocList.forEach(function (item, index) {
+      self.topicList.forEach(function (item, index) {
         var dom = self.createPixelDom(item, index);
         var pixelType = self.getPixelType(item);
 

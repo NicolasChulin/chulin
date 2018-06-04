@@ -215,11 +215,52 @@ li {
       }
     }
   }
+  .cont-title{
+    height: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 15px;
+  }
 }
 
 .page-element-item{
   position: relative;
   width: 100%;
+}
+
+
+// barcode
+.element-barcode{
+  text-align: center;
+
+  .barcode-img{
+    padding: 20px 0 5px;
+
+    .barcode-img-back{
+      display: none;
+    }
+    img{
+      display: inline-block;
+      vertical-align: bottom;
+      height: 65px;
+      width: auto;
+    }
+  }
+  .barcode-num{
+    font-size: 17px;
+    span:nth-of-type(1){
+      display: none;
+    }
+  }
+}
+
+// text
+.element-text{
+  p {
+    span:nth-of-type(1){
+      display: none;
+    }
+  }
 }
 
 // noun
@@ -249,6 +290,11 @@ li {
     vertical-align: bottom;
     margin-bottom: 15px;
     width: 25%;
+  }
+  &-judge{
+    ul{
+      width: 16.5%;
+    }
   }
 
   li{

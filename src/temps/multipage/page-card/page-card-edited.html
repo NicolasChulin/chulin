@@ -19,91 +19,22 @@
       <div class="cont-mf"><span>密封线</span></div>
       <div class="cont-items">
         <div class="cont-box cont-box-act">
-          <div id="element-select-100" class="element-item element-select" style="z-index: 129; width: 875px; height: 140px; left: 0px; top: 169px; padding: 0px; border-style: solid; border-color: rgb(51, 51, 51);">
-            <div>
-              <ul>
-                <li><i>1</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>2</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>3</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>4</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>5</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-              </ul>
-              <ul>
-                <li><i>6</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>7</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>8</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>9</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>10</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-              </ul>
-              <ul>
-                <li><i>11</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>12</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>13</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>14</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-                <li><i>15</i> <i>A</i><i>B</i><i>C</i><i>D</i></li>
-              </ul>
+          <div id="element-barcode-100" class="element-item element-barcode" style="z-index: 101; width: 400px; height: 130px; left: 0px; top: 115px;">
+            <div class="element-cont">
+              <div class="barcode-img">
+                <div class="barcode-img-back"></div> <img src="${params.encodeImg!}" alt="barcode" class="barcode-md"></div>
+              <p class="barcode-num"><span>123456789</span><span>${params.examCardNo!}</span></p>
             </div>
           </div>
-          <div id="element-fill-102" class="element-item element-fill element-item-act" style="z-index: 131; width: 875px; height: 165px; left: 0px; top: 409px; padding: 0px; border-style: solid; border-color: rgb(51, 51, 51);">
-            <div>
-              <ul class="noun-cols-5">
-                <li class="input-line"><span>(1)</span><span></span></li>
-                <li class="input-line"><span>(2)</span><span></span></li>
-                <li class="input-line"><span>(3)</span><span></span></li>
-                <li class="input-line"><span>(4)</span><span></span></li>
-                <li class="input-line"><span>(5)</span><span></span></li>
-                <li class="input-line"><span>(6)</span><span></span></li>
-                <li class="input-line"><span>(7)</span><span></span></li>
-                <li class="input-line"><span>(8)</span><span></span></li>
-                <li class="input-line"><span>(9)</span><span></span></li>
-                <li class="input-line"><span>(10)</span><span></span></li>
-                <li class="input-line"><span>(11)</span><span></span></li>
-                <li class="input-line"><span>(12)</span><span></span></li>
-                <li class="input-line"><span>(13)</span><span></span></li>
-                <li class="input-line"><span>(14)</span><span></span></li>
-                <li class="input-line"><span>(15)</span><span></span></li>
-                <li class="input-line"><span>(16)</span><span></span></li>
-                <li class="input-line"><span>(17)</span><span></span></li>
-                <li class="input-line"><span>(18)</span><span></span></li>
-                <li class="input-line"><span>(19)</span><span></span></li>
-                <li class="input-line"><span>(20)</span><span></span></li>
-              </ul>
-            </div>
-          </div>
-          <div id="element-noun-112" class="element-item element-noun" style="z-index: 127; width: 875px; height: 100px; left: 0px; top: 0px; padding: 0px; border-style: solid; border-color: rgb(51, 51, 51);">
-            <div>
-              <ul class="noun-cols-2">
-                <li class="input-line require-flex"><span>学号：</span><span><em>${student_code!}</em></span></li>
-                <li class="input-line require-flex"><span>准考证号：</span><span><em>${exam_number!}</em></span></li>
-              </ul>
+          <div id="element-text-102" class="element-item element-text element-item-act" style="z-index: 103; width: 400px; height: 32px; left: 204px; top: 0px;">
+            <div class="element-cont">
+              <p style="font-size: 16px; line-height: 30px; text-align: center; font-weight: 300;"><span>考试名</span><span>${params.examName!}</span></p>
             </div>
           </div>
         </div>
       </div>
       <div class="cont-items">
-        <div class="cont-box">
-          <div id="element-write-102" class="element-item element-write" style="z-index: 112; width: 876px; height: 405px; left: 0px; top: 78px;">
-            <div>
-              <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-            </div>
-          </div>
-          <div id="element-text-104" class="element-item element-text" style="z-index: 113; width: 400px; height: 32px; left: 239px; top: 0px;">
-            <div>
-              <p style="font-size: 16px; line-height: 30px; text-align: center; font-weight: 300;">jalsdlakdklajs</p>
-            </div>
-          </div>
-        </div>
+        <div class="cont-box"></div>
       </div>
     </div>
   </div>
