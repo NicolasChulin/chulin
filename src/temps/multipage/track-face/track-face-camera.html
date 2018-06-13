@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,13 @@
   <script src="js/tracking-extend.js"></script>
   <script src="js/data/face-min.js"></script>
   <style media="screen">
-    .demo-frame{
+    .demo-frame {
       padding: 50px 0;
       width: 1300px;
       margin: 0 auto;
     }
-    .demo-container{
+
+    .demo-container {
       border: 1px solid #e0e0e0;
       height: 600px;
       padding: 50px;
@@ -22,13 +24,15 @@
       text-align: center;
     }
 
-    #video, #canvas {
+    #video,
+    #canvas {
       position: absolute;
       top: 150px;
       left: 0;
       border: 1px solid #e0e0e0;
     }
-    #shot{
+
+    #shot {
       position: absolute;
       width: 320px;
       height: 240px;
@@ -38,6 +42,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="demo-frame">
@@ -58,7 +63,7 @@
 
   <script>
     window.onload = function () {
-      var tf = new TrackingFace();
+      var tf = new TrackingFace({ aniDuring: 1000 });
       var moreWarningNum = 0;
       document.getElementById('start').addEventListener('click', function (e) {
         tf.catchView(function (screenShotImg) {
@@ -83,4 +88,5 @@
   </script>
 
 </body>
+
 </html>
