@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>bibao</title>
+  <script type="text/javascript" src="../lib/js/jquery.js"></script>
+
+</head>
+
+<body>
+  <style media="screen">
+    li,
+    .li-1,
+    .li-2 {
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      width: 500px;
+      border: 1px solid #b0b0b0;
+      margin: 10px 0;
+      display: block;
+    }
+
+
+    span:nth-child(2) {
+      background: #ff0000;
+    }
+  </style>
+  <div class="content" id="content">
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+    <p>list-1</p>
+    <div class="list">
+      <p class="li-1">1</p>
+      <span class="li-1">1</span>
+      <span class="li-1">1</span>
+      <span class="li-2">2</span>
+    </div>
+    <p>list-2</p>
+    <div class="list">
+      <span class="li-2">2</span>
+      <p class="li-2">2</p>
+      <span class="li-1">1</span>
+      <span class="li-1">1</span>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var lis = document.getElementsByTagName('li');
+    for (let i = 0, len = lis.length; i < len; i++) {
+      lis[i].onclick = function () {
+        console.log(i + 1);
+      }
+      // (function(i){
+      //     lis[i].onclick = function() {
+      //         console.log(i+1);
+      //     }
+      // })(i);
+    }
+
+  </script>
+</body>
+
+</html>
