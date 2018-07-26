@@ -1,0 +1,200 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>advance chart</title>
+  <link rel="stylesheet" href="/static/css/en-report.css">
+</head>
+
+<body>
+  <div class="ch-box">
+    <div class="report-chart chart-advance">
+      <div class="chart-map" id="ad-chart">
+      </div>
+      <div class="chart-table" id="chart-table">
+      </div>
+    </div>
+  </div>
+
+  <script src="/libs/js/echarts.min.js"></script>
+  <script>
+    var onload = function () {
+      // echart
+      var datas = {
+        headerCol: [
+          '一月',
+          '二月',
+          '三月',
+          '四月',
+          '五月',
+          '6月',
+          '7月',
+          '8月',
+          '9月',
+          '10月'
+        ],
+        tdatas: [
+          {
+            name: '短文朗读',
+            nums: [89.3, 89.1, 90.0, 91.4, 91.2, 81.2, 71.2, 91.2, 81.2, 71.2]
+          },
+          {
+            name: '口头表达',
+            nums: [83.4, 82.6, 85.1, 84.0, 83.6, 61.2, 51.2, 83.6, 61.2, 51.2]
+          },
+          {
+            name: '情景反应',
+            nums: [75.7, 79.4, 78.8, 75.2, 76.8, 91.2, 61.2, 76.8, 91.2, 61.2]
+          }
+        ]
+      }
+      var legend = []
+      var xaxis = datas.headerCol
+      var series = []
+      var xlen = datas.headerCol.length
+      datas.tdatas.forEach(item => {
+        series.push({
+          name: item.name,
+          type: 'bar',
+          barWidth: 15,
+          data: item.nums,
+          markLine: {
+            data: []
+          }
+        })
+        legend.push(item.name)
+      })
+      datas.tdatas.forEach(item => {
+        var zname = '指数（' + item.name + '）'
+        series.push({
+          name: zname,
+          type: 'line',
+          data: item.nums,
+          lineStyle: {
+            normal: {
+              type: 'dashed',
+              width: 1
+            }
+          }
+        })
+        legend.push(zname)
+      })
+
+      var option = {
+        color: ['#62A0FF', '#85DDEF', '#FF9999'],
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          right: 30,
+          top: 'middle',
+          orient: 'vertical',
+          itemWidth: 15,
+          type: 'scroll',
+          data: legend
+        },
+        grid: {
+          left: '3%',
+          top: '8%',
+          right: '20%',
+          bottom: '13%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          // data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+          data: xaxis,
+          axisLabel: {
+            color: '#547BA4'
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#c5dcff'
+            }
+          },
+          splitLine: {
+            show: false
+          },
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        yAxis: {
+          type: 'value',
+          min: 50,
+          max: 100,
+          axisLabel: {
+            color: '#547BA4'
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#c5dcff'
+            }
+          },
+          splitLine: {
+            show: false
+          }
+        },
+        series: series
+      }
+
+      if (xlen > 6) {
+        var end = Math.floor(6 * 100 / xlen)
+        option.dataZoom = [
+          {
+            type: 'inside',
+            start: 0,
+            end: end
+          },
+          {
+            type: 'slider',
+            start: 0,
+            end: end
+          }
+        ];
+      }
+
+      var chart = echarts.init(document.getElementById('ad-chart'))
+      chart.setOption(option)
+
+      // table
+      var innerHtm = '<div class="chart-table-left">';
+      innerHtm += '<table cellspacing="2">';
+      innerHtm += '<thead><tr><th>专项</th></tr></thead>';
+      innerHtm += '<tbody>'
+      for (var i = 0, len = datas.tdatas.length; i < len; i++) {
+        innerHtm += '<tr><td>' + datas.tdatas[i].name + '</td></tr>';
+      }
+      innerHtm += '</tbody>';
+      innerHtm += '</table></div>';
+      innerHtm += '<div class="chart-table-right">';
+      innerHtm += '<table cellspacing="2">';
+      innerHtm += '<thead><tr>';
+      for (var i = 0, len = datas.headerCol.length; i < len; i++) {
+        innerHtm += '<th>' + datas.headerCol[i] + '</th>';
+      }
+      innerHtm += '</tr></thead>';
+      innerHtm += '<tbody>'
+      for (var i = 0, len = datas.tdatas.length; i < len; i++) {
+        innerHtm += '<tr>';
+        var item = datas.tdatas[i];
+        for (var j = 0, itemlen = item.nums.length; j < itemlen; j++) {
+          innerHtm += '<td>' + item.nums[i] + '</td>';
+        }
+        innerHtm += '</tr>'
+      }
+      innerHtm += '</tbody>';
+      innerHtm += '</table></div>';
+      document.getElementById('chart-table').innerHTML = innerHtm;
+    }
+    window.onload = onload;
+  </script>
+
+</body>
+
+</html>

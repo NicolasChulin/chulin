@@ -1,0 +1,105 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>exercise chart</title>
+  <link rel="stylesheet" href="/static/css/en-report.css">
+</head>
+
+<body>
+  <div class="ch-box">
+    <div class="report-chart chart-exercise">
+      <div class="chart-map" id="tv-chart">
+        <!-- <img src="/static/images/pie.png" alt="pie.png"> -->
+      </div>
+      <div class="chart-infos">
+        <div class="infos-detail">
+          <p>8129
+            <i>次</i>
+          </p>
+          <p>近一周总训练量</p>
+          <p>829.38%</p>
+          <p>近一周听说模拟训练量第一</p>
+        </div>
+        <div class="infos-tips">
+          <p>
+            <em></em>短文朗读（训练量占比456.21%， 达到456次)</p>
+          <p>
+            <em></em>情景反应（训练量占比235.10%， 达到235次)</p>
+          <p>
+            <em></em>口头表达（训练量占比678.31%， 达到678次)</p>
+          <p>
+            <em></em>听说模拟（训练量占比829.38%， 达到829次)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/libs/js/echarts.min.js"></script>
+  <script>
+    var onload = function () {
+      var datas = [
+        { value: 335, name: '短文阅读' },
+        { value: 310, name: '情景反应' },
+        { value: 234, name: '口头表达' },
+        { value: 135, name: '听说模拟' }
+      ]
+      var option = {
+        color: [
+          '#62A0FF',
+          '#85DDEF',
+          '#7de3cf',
+          '#FF9999',
+          '#FFDD8C',
+          '#d48265',
+          '#91c7ae'
+        ],
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        series: [
+          {
+            name: '训练量',
+            type: 'pie',
+            radius: '100%',
+            minAngle: 5,
+            center: ['50%', '50%'],
+            hoverAnimation: false,
+            label: {
+              normal: {
+                show: true,
+                position: 'inside',
+                formatter: '{b} \n{d}%',
+                textStyle: {
+                  fontSize: '14'
+                }
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: '16',
+                  fontWeight: 'bold'
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            data: datas
+          }
+        ]
+      }
+      var chart = echarts.init(document.getElementById('tv-chart'));
+      chart.setOption(option);
+    }
+    window.onload = onload;
+  </script>
+
+</body>
+
+</html>

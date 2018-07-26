@@ -1,0 +1,221 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>my position chart</title>
+  <link rel="stylesheet" href="/static/css/en-report.css">
+</head>
+
+<body>
+  <div class="ch-box">
+    <div class="report-chart">
+      <div class="pos-chart" id="pos-chart">
+      </div>
+    </div>
+  </div>
+
+  <script src="/libs/js/echarts.min.js"></script>
+  <script>
+    var onload = function () {
+      var datas = [
+        {
+          range: [0, 0.6],
+          vals: [
+            { col: '短文阅读', value: 5 },
+            { col: '情景反应', value: 3 },
+            { col: '口头表达', value: 8 },
+            { col: '听说模拟', value: 6 }
+          ]
+        },
+        {
+          range: [0.6, 0.7],
+          vals: [
+            { col: '短文阅读', value: 8 },
+            { col: '情景反应', value: 7 },
+            { col: '口头表达', value: 11 },
+            { col: '听说模拟', value: 10 }
+          ]
+        },
+        {
+          range: [0.7, 0.8],
+          vals: [
+            { col: '短文阅读', value: 14 },
+            { col: '情景反应', value: 16 },
+            { col: '口头表达', value: 27 },
+            { col: '听说模拟', value: 16 }
+          ]
+        },
+        {
+          range: [0.8, 0.9],
+          vals: [
+            { col: '短文阅读', value: 19 },
+            { col: '情景反应', value: 17 },
+            { col: '口头表达', value: 2 },
+            { col: '听说模拟', value: 7 }
+          ]
+        },
+        {
+          range: [0.9, 1],
+          vals: [
+            { col: '短文阅读', value: 4 },
+            { col: '情景反应', value: 4 },
+            { col: '口头表达', value: 2 },
+            { col: '听说模拟', value: 6 }
+          ]
+        }
+      ]
+      var studentRatio = [
+        { col: '短文阅读', value: 0.99 },
+        { col: '情景反应', value: 0.75 },
+        { col: '口头表达', value: 0.67 },
+        { col: '听说模拟', value: 0.93 }
+      ]
+
+      var getRatioRange = function (ratio, ranges) {
+        var range = ''
+        ranges.forEach(item => {
+          if (ratio >= item[0] && ratio < item[1]) {
+            range = '[' + item.join(',') + ']'
+          }
+        })
+        return range
+      }
+
+      var legend = []
+      var yaxis = []
+      var seriesDatas = {}
+      var series = []
+      var stuRs = {}
+      var ranges = []
+      var colors = ['#62A0FF', '#85DDEF', '#FF9999', '#FFDD8C']
+
+      datas.forEach((item, tindex) => {
+        var range = '[' + item.range.join(',') + ']'
+
+        ranges.push(item.range)
+        yaxis.push(range)
+        item.vals.forEach((elem, eindex) => {
+          var ind = eindex - Math.floor(eindex / colors.length) * colors.length
+
+          if (tindex === 0) {
+            legend.push(elem.col)
+          }
+          if (!seriesDatas[elem.col]) {
+            seriesDatas[elem.col] = { color: colors[ind], list: [] }
+          }
+          seriesDatas[elem.col].list.push(elem.value)
+        })
+      })
+
+      studentRatio.forEach(item => {
+        stuRs[item.col] = getRatioRange(item.value, ranges)
+      })
+
+      for (var key in seriesDatas) {
+        var labelColor = seriesDatas[key].color
+
+        series.push({
+          name: key,
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: labelColor
+          },
+          label: {
+            show: true,
+            align: 'center',
+            position: 'top',
+            offset: [0, 32],
+            formatter: function (params) {
+              var value = params.data
+              var type = params.seriesName
+              var range = params.name
+              var format = ['{label|' + value + '}']
+              if (stuRs[type] === range) {
+                format.unshift('{icon|}\n{cirl|}')
+              } else {
+                format.unshift('{wbk|}')
+              }
+              return format.join('\n')
+            },
+            rich: {
+              label: {
+                width: 30,
+                lineHeight: 26,
+                align: 'center',
+                color: '#fff'
+              },
+              wbk: {
+                width: 30,
+                height: 28
+              },
+              icon: {
+                width: 18,
+                height: 18,
+                borderRadius: 50,
+                color: '#fff',
+                backgroundColor: labelColor
+              },
+              cirl: {
+                width: 2,
+                height: 6,
+                backgroundColor: labelColor
+              }
+            }
+          },
+          barWidth: 30,
+          data: seriesDatas[key].list
+        })
+      }
+      var option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          bottom: 20,
+          itemWidth: 15,
+          data: legend
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          top: '10%',
+          bottom: '10%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'value',
+          show: false
+        },
+        yAxis: {
+          type: 'category',
+          axisLine: {
+            lineStyle: {
+              color: '#c5dcff'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            color: '#547BA4'
+          },
+          data: yaxis
+        },
+        series: series
+      }
+
+      var chart = echarts.init(document.getElementById('pos-chart'))
+      chart.setOption(option)
+    }
+    window.onload = onload;
+  </script>
+
+</body>
+
+</html>
